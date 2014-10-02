@@ -103,6 +103,34 @@ public class Test {
 				+ trParfait.getInformationEmise());
 		System.out.println("Info recue par destination finale:"
 				+ dstFinale.getInformationRecue());
-
+		
+		//appel de la fonction de calcul du taux d'erreur binaire
+		float tauxErrBin = 0;
+		tauxErrBin = tauxErreurBinaire(src, dstFinale);
+		System.out.println("\nLe taux d'erreur binaire est égal à "+tauxErrBin+"%");
+	}
+	
+	/**
+	 * Cette foncion permet de calculer et de retourner le taux d'erreur binaire
+	 * entre le message envoyé à la source et le message reçut par la
+	 * destination.
+	 * 
+	 * @param source
+	 * @param destination
+	 * @return
+	 */
+	public static float tauxErreurBinaire(Source<Boolean> source,
+			Destination<Boolean> destination) {
+		Information messEmis = source.informationEmise;
+		Information messRecu = destination.informationRecue;
+		float errBinaire = 0;
+		int nbErr = 0;
+		for (int i = 0; i < messEmis.nbElements(); i++) {
+			if (messEmis.iemeElement(i) != messRecu.iemeElement(i)) {
+				nbErr++;
+			}
+		}
+		errBinaire = (float) (1.0 * nbErr / messEmis.nbElements());
+		return errBinaire;
 	}
 }
