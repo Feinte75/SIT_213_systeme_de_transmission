@@ -1,5 +1,5 @@
 
-public class Test {
+public class ApplicationTransmissionLogiqueParfaite {
 	/**
 	 * Verifier si la sonde est demandee ou pas par l'utilisateur
 	 * @param arg
