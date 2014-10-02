@@ -29,7 +29,7 @@ public class Test {
 	}
 
 	public static void main(String[] args) throws InformationNonConforme {
-
+		//test github
 		int nbArgs = args.length;
 		Source<Boolean> src = null;
 		
