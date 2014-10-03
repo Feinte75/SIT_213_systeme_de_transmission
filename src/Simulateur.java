@@ -32,7 +32,7 @@ public class Simulateur {
 		float amplRel = 0.0f;
 		// -transducteur
 		boolean transducteur = false;
-
+		
 		/********************************************/
 		// traitement des arguments
 		int i = 0;
@@ -43,23 +43,23 @@ public class Simulateur {
 				if(args[++i].matches("[123]||[45][ab]")) etape = args[i];
 				break;
 			case "-mess":
-				message = args[i];
+				message = args[++i];
 				break;
 			case "-s":
 				sonde = true;
 				break;
 			case "-form":
-				forme = args[i];
+				forme = args[++i];
 				break;
 			case "-nbEch":
-				nbEch = Integer.parseInt(args[i]);
+				nbEch = Integer.parseInt(args[++i]);
 				break;
 			case "-ampl":
-				amplMin = (float) (Float.parseFloat(args[i]));
-				amplMax = (float) (Float.parseFloat(args[i]));
+				amplMin = (float) (Float.parseFloat(args[++i]));
+				amplMax = (float) (Float.parseFloat(args[++i]));
 				break;
 			case "-snr":
-				rsb = (float) (Float.parseFloat(args[i]));
+				rsb = (float) (Float.parseFloat(args[++i]));
 				break;
 			case "-ti":
 				iEmeTrajet = Integer.parseInt(args[i]);
@@ -72,5 +72,16 @@ public class Simulateur {
 			}
 			i++;
 		}
+		
+		System.out.println("Paramètres : -etape =" + etape +" , -mess =" + message + " , -s =" + true + " , -form =" + forme + " , -nbEch =" + nbEch +
+				" , -ampl =" + amplMin + " et " + amplMax);
+		
+		ApplicationTransmissionLogiqueParfaite app1 = new ApplicationTransmissionLogiqueParfaite();
+		app1.execution(message, sonde);
+		
+		ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
+		app2.execution(message, amplMin, amplMax, nbEch, forme);
+		
+		
 	}
 }

@@ -6,7 +6,7 @@
  *
  */
 
-public class TransmetteurParfait extends Transmetteur<Boolean, Boolean> {
+public class TransmetteurParfait<E, R> extends Transmetteur<E, R> {
 
 	public TransmetteurParfait() {
 	
@@ -15,11 +15,11 @@ public class TransmetteurParfait extends Transmetteur<Boolean, Boolean> {
 	 * Pour recevoir l'information envoyee par le composant precedent 
 	 */
 	@Override
-	public void recevoir(Information<Boolean> information)
+	public void recevoir(Information<E> information)
 			throws InformationNonConforme {
 
 		informationRecue = information;
-		informationEmise = informationRecue;
+		informationEmise = (Information<R>) informationRecue;
 		
 	}
 	/**
@@ -27,16 +27,7 @@ public class TransmetteurParfait extends Transmetteur<Boolean, Boolean> {
 	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
-
-		
-		//Parcourir la liste des destinations du transmetteur
-		java.util.Iterator<DestinationInterface<Boolean>> itr = destinationsConnectees.iterator();
-		while (itr.hasNext()) {
-			//Appeler la methode recevoir pour chaque destination
-			DestinationInterface<Boolean> di = itr.next();
-			di.recevoir(informationEmise);
-		}
-
+		super.emettre();
 	}
 
 }

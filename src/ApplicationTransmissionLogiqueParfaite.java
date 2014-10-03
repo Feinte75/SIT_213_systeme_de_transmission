@@ -32,7 +32,7 @@ public class ApplicationTransmissionLogiqueParfaite {
 		//test github
 		int nbArgs = args.length;
 		Source<Boolean> src = null;
-		
+
 		//Verifier que l'utilisateur a bien saisi des arguments
 		if(nbArgs != 0){
 			//Verifier que les arguments saisis par l'utilisateur sont conformes
@@ -41,7 +41,7 @@ public class ApplicationTransmissionLogiqueParfaite {
 				// ou si l'argument n'est pas une suite de chiffres compris entre 0 et 9 à hauteur de 6 chiffes maximum
 				throw new InformationNonConforme("Argument invalide");
 		}
-		
+
 		//Comportement par défaut : verifier si l'utilisateur n'a pas saisi d'argument ou s'il a saisi 0 comme premier argument
 		if (nbArgs == 0 || args[0].equals("0")) {
 			//Generation d'une suite de bits aleatoire de longueure 100
@@ -61,11 +61,11 @@ public class ApplicationTransmissionLogiqueParfaite {
 		//Instanciation d'un objet TransmetteurParfait et DestinationFinale
 		TransmetteurParfait trParfait = new TransmetteurParfait();
 		DestinationFinale dstFinale = new DestinationFinale();
-		
+
 		//Instanciation des deux sondes logiques
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
 		SondeLogique sondeTransmetteur = new SondeLogique("Signal emis par le transmetteur");
-		
+
 		//Verifier que l'utilisateur a bien saisi deux arguments et qu'il a choisi d'utiliser les sondes
 		if (nbArgs >= 2 && isSondeDemandee(args[1])) {
 			//Connecter le transmetteur parfait a la source
@@ -103,13 +103,80 @@ public class ApplicationTransmissionLogiqueParfaite {
 				+ trParfait.getInformationEmise());
 		System.out.println("Info recue par destination finale:"
 				+ dstFinale.getInformationRecue());
-		
+
 		//appel de la fonction de calcul du taux d'erreur binaire
 		float tauxErrBin = 0;
 		tauxErrBin = tauxErreurBinaire(src, dstFinale);
 		System.out.println("\nLe taux d'erreur binaire est égal à "+tauxErrBin+"%");
 	}
-	
+
+	public void execution(String mess, boolean sonde){
+		
+		Source<Boolean> src = null;
+		
+		//Verifier si l'utilisateur a choisi une source fixe
+		if (isSourceFixe(mess)) {
+			//Generer la suite de bits correspondante a l'argument saisi par l'utilisateur
+			src = new SourceFixe(mess);
+		} 
+		//Verifier si l'utilisateur a choisi une source aleatoire
+		else if (isSourceAleatoire(mess)) {
+			//Generer une suite de bits aleatoire dont la taille est la valeur decimale l'argument saisi par l'utilisateur
+			src = new SourceAleatoire(mess);
+		}
+
+		//Instanciation d'un objet TransmetteurParfait et DestinationFinale
+		TransmetteurParfait trParfait = new TransmetteurParfait();
+		DestinationFinale dstFinale = new DestinationFinale();
+
+		//Instanciation des deux sondes logiques
+		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
+		SondeLogique sondeTransmetteur = new SondeLogique("Signal emis par le transmetteur");
+
+		//Verifier que l'utilisateur a bien saisi deux arguments et qu'il a choisi d'utiliser les sondes
+		if (sonde) {
+			//Connecter le transmetteur parfait a la source
+			src.connecter(trParfait);
+			//Connecter la destination finale au transmetteur parfait
+			trParfait.connecter(dstFinale);
+			//Connecter les sondes a chaque composant
+			src.connecter(sondeSource);
+			trParfait.connecter(sondeTransmetteur);
+		}
+		//Si ce n'est pas le cas
+		else {
+			//Connecter seulement les elements de la chaine de transmission sans sondes
+			src.connecter(trParfait);
+			trParfait.connecter(dstFinale);
+		}
+
+		try {
+			//Emission de la source
+			src.emettre();
+			//Emission du transmetteur parfait
+			trParfait.emettre();
+		} catch (InformationNonConforme e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		System.out.println("Info generee par source          :"
+				+ src.informationGeneree);
+		System.out.println("Info emise par source            :"
+				+ src.getInformationEmise());
+		System.out.println("Info recue par transmetteur      :"
+				+ trParfait.getInformationRecue());
+		System.out.println("Info emise par transmetteur      :"
+				+ trParfait.getInformationEmise());
+		System.out.println("Info recue par destination finale:"
+				+ dstFinale.getInformationRecue());
+
+		//appel de la fonction de calcul du taux d'erreur binaire
+		float tauxErrBin = 0;
+		tauxErrBin = tauxErreurBinaire(src, dstFinale);
+		System.out.println("\nLe taux d'erreur binaire est égal à "+tauxErrBin+"%");
+	}
+
 	/**
 	 * Cette foncion permet de calculer et de retourner le taux d'erreur binaire
 	 * entre le message envoyé à la source et le message reçut par la

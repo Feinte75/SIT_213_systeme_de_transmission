@@ -1,6 +1,7 @@
 
 
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 
@@ -13,7 +14,7 @@ import java.util.LinkedList;
  * @author prou
  */
 public abstract class Transmetteur<R, E> implements DestinationInterface<R>,
-		SourceInterface<E> {
+SourceInterface<E> {
 
 	/**
 	 * la liste des composants destination connect�s en sortie du transmetteur
@@ -92,5 +93,15 @@ public abstract class Transmetteur<R, E> implements DestinationInterface<R>,
 	/**
 	 * pour �mettre l'information contenue dans l'entr�e du transmetteur
 	 */
-	public abstract void emettre() throws InformationNonConforme;
+	public void emettre() throws InformationNonConforme{
+		
+		//Parcourir la liste des destinations du transmetteur
+		Iterator<DestinationInterface<E>> itr = destinationsConnectees.iterator();
+		while (itr.hasNext()) {
+			//Appeler la methode recevoir pour chaque destination
+			DestinationInterface<E> di = itr.next();
+			di.recevoir(informationEmise);
+		}
+
+	}
 }
