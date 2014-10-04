@@ -18,7 +18,7 @@ public class Simulateur {
 		// -s
 		boolean sonde = false;
 		// -form
-		String forme = "RZ";
+		TypeCodage forme = TypeCodage.NRZ;
 		// -nbEch
 		int nbEch = 10;
 		// -ampl
@@ -37,7 +37,7 @@ public class Simulateur {
 		// traitement des arguments
 		int i = 0;
 
-		while (i < args[i].length()) {
+		while (i < args.length) { // args[i].length() -> taille de l'argument, args.length -> taille du tableau d'argument
 			switch (args[i]) {
 			case "-etape":
 				if(args[++i].matches("[123]||[45][ab]")) etape = args[i];
@@ -49,9 +49,19 @@ public class Simulateur {
 				sonde = true;
 				break;
 			case "-form":
-				forme = args[++i];
+				switch(args[++i]){
+				case "RZ": 
+					forme = TypeCodage.NRZ;
+					break;
+				case "NRZ":
+					forme = TypeCodage.NRZ;
+					break;
+				case "NRZT":
+					forme = TypeCodage.NRZT;
+					break;
+				}
 				break;
-			case "-nbEch":
+			case "-nbech":
 				nbEch = Integer.parseInt(args[++i]);
 				break;
 			case "-ampl":
@@ -73,14 +83,19 @@ public class Simulateur {
 			i++;
 		}
 		
-		System.out.println("Paramètres : -etape =" + etape +" , -mess =" + message + " , -s =" + true + " , -form =" + forme + " , -nbEch =" + nbEch +
+		System.out.println("Paramètres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
 				" , -ampl =" + amplMin + " et " + amplMax);
 		
-		ApplicationTransmissionLogiqueParfaite app1 = new ApplicationTransmissionLogiqueParfaite();
-		app1.execution(message, sonde);
+		if(etape.equals("1")){
+			ApplicationTransmissionLogiqueParfaite app1 = new ApplicationTransmissionLogiqueParfaite();
+			app1.execution(message, sonde);
+		}
+		else if (etape.equals("2")){
+			ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
+			app2.execution(message, amplMin, amplMax, nbEch, forme, sonde);
+		}
+		else System.out.println("Etape non codée pour le moment");
 		
-		ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
-		app2.execution(message, amplMin, amplMax, nbEch, forme);
 		
 		
 	}

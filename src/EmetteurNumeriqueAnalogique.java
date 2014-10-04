@@ -57,9 +57,9 @@ Transmetteur<Boolean, Float> implements Convertisseur {
 	public void codageNRZ() {
 
 		for(int i = 0; i < informationRecue.nbElements(); i++){
-			System.out.println("info reçue : "+ informationRecue.nbElements());
+			//System.out.println("info reçue : "+ informationRecue.nbElements());
 			for(int j = 0; j < nbEchantillon; j++){
-				System.out.println("i : "+i+"  j : "+j);
+				//System.out.println("i : "+i+"  j : "+j);
 				if(informationRecue.iemeElement(i)) 
 					informationEmise.add(max);
 				else informationEmise.add(min);

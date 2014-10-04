@@ -29,8 +29,10 @@ public class ApplicationTransmissionAnalogiqueParfaite {
 		return (0 < arg.length() && arg.length() <= 6);
 	}
 
-	public void execution(String mess, float min, float max, int nbEchantillon, String forme){
-
+	public void execution(String mess, float min, float max, int nbEchantillon, TypeCodage codage, boolean sonde){
+		
+		// TODO : Prise en compte de la variable sonde
+		
 		Source<Boolean> src = null;
 
 		//Verifier si l'utilisateur a choisi une source fixe
@@ -45,9 +47,9 @@ public class ApplicationTransmissionAnalogiqueParfaite {
 		}
 
 		//Instanciation d'un objet TransmetteurParfait et DestinationFinale
-		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min, max, nbEchantillon, TypeCodage.NRZ);
+		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min, max, nbEchantillon, codage);
 		TransmetteurParfait<Float, Float> trParfait = new TransmetteurParfait<Float, Float>();
-		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(min, max, nbEchantillon, TypeCodage.NRZ);
+		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(min, max, nbEchantillon, codage);
 		DestinationFinale dstFinale = new DestinationFinale();
 
 		//Instanciation des deux sondes logiques
