@@ -21,11 +21,13 @@ public abstract class Application {
 		int nbErr = 0;
 		for (int i = 0; i < messEmis.nbElements(); i++) {
 			if (messEmis.iemeElement(i).booleanValue() != messRecu.iemeElement(i).booleanValue()) { // Test sur les valeurs (booleanValue) et non sur les references des objets Boolean
+				//System.out.println("mssemis : "+);
 				nbErr++;
 			}
 		}
-		System.out.println("Nb err : "+ nbErr + " nbElements"+messEmis.nbElements());
-		errBinaire = (float) (nbErr / messEmis.nbElements());
+		System.out.println("Nb err : "+ nbErr + " nbElements :"+messEmis.nbElements());
+		errBinaire =  ((float)nbErr / messEmis.nbElements())*100;
 		return errBinaire;
+		
 	}
 }

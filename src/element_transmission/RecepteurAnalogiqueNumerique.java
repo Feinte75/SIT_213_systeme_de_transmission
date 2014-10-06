@@ -38,18 +38,14 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 
 	private void decodageNRZT() {
 
-		for(int i=0; i<informationRecue.nbElements();i+= nbEchantillon){
+		for(int i=nbEchantillon/2; i<informationRecue.nbElements();i+= nbEchantillon){
 
-			for(int j = i; j < i + nbEchantillon; j++){
-
-				if(informationRecue.iemeElement(j/2).floatValue()==max){
+				if(informationRecue.iemeElement(i/2).floatValue()==max){
 					informationEmise.add(new Boolean(true));
 				}
 				else {
 					informationEmise.add(new Boolean(false));
 				}
-
-			}
 		}
 
 	}
@@ -73,12 +69,16 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 
 	private void decodageRZ() {
 
-		for(int i = 0; i < informationRecue.nbElements(); i++){
+		for(int i=nbEchantillon/4; i<informationRecue.nbElements();i+= nbEchantillon){
 
-			for(int j = 0; j < nbEchantillon; j++){
-
+			if(informationRecue.iemeElement(i).floatValue()==max){
+				informationEmise.add(new Boolean(true));
 			}
-		}
+			else {
+				informationEmise.add(new Boolean(false));
+			}
+	}
+
 
 	}
 

@@ -44,15 +44,15 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 
 			for (int j = 0; j < nbEchantillon; j++) {
 
-				if (informationRecue.iemeElement(j)) {
+				if (informationRecue.iemeElement(i)) {
 					if (j < nbEchantillon / 2)
 						informationEmise.add(max);
-					else if (j > nbEchantillon / 2)
+					else if (j >= nbEchantillon / 2)
 						informationEmise.add(0f);
 				} else {
 					if (j < nbEchantillon / 2)
 						informationEmise.add(min);
-					else if (j > nbEchantillon / 2)
+					else if (j >= nbEchantillon / 2)
 						informationEmise.add(0f);
 				}
 			}
