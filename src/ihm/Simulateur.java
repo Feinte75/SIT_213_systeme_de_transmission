@@ -54,7 +54,7 @@ public class Simulateur {
 				etape = args[i];
 				break;
 			case "-mess":
-				if(!(args[++i].matches("[1|0]+") || args[++i].matches("[0-9]{1,6}")) )
+				if(!(args[++i].matches("[1|0]+||[0-9]{1,6}")))
 					//Lever l'exception InformationNonConforme si l'argument n'est pas une suite de 0 et de 1
 					// ou si l'argument n'est pas une suite de chiffres compris entre 0 et 9 à hauteur de 6 chiffes maximum
 					throw new InformationNonConforme("Argument -mess invalide");
@@ -77,7 +77,7 @@ public class Simulateur {
 				default : throw new InformationNonConforme("Argument -form invalide");
 				}
 				break;
-			case "-nbech":
+			case "-nbEch":
 				if(!(Integer.parseInt(args[++i]) >= 0)) throw new InformationNonConforme("Argument -nbEch invalide");
 				nbEch = Integer.parseInt(args[i]);
 				break;
