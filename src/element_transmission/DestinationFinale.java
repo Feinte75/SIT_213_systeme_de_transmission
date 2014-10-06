@@ -1,3 +1,6 @@
+package element_transmission;
+import exception.InformationNonConforme;
+
 
 
 /**
@@ -6,12 +9,12 @@
  *
  */
 
-public class DestinationFinale extends Destination<Boolean> {
+public class DestinationFinale<T> extends Destination<T> {
 	/**
 	 * Pour recevoir l'information envoyee par le composant precedent 
 	 */
 	@Override
-	public void recevoir(Information<Boolean> information)
+	public void recevoir(Information<T> information)
 			throws InformationNonConforme {
 
 		informationRecue = information;

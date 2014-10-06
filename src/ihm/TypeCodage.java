@@ -1,3 +1,4 @@
+package ihm;
 
 public enum TypeCodage {
 	

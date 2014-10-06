@@ -1,25 +1,22 @@
+package application;
+import sonde.SondeLogique;
+import element_transmission.DestinationFinale;
+import element_transmission.Source;
+import element_transmission.TransmetteurParfait;
+import exception.InformationNonConforme;
+
 /**
  * 
  * Livrable n�1
  *
  */
 public class ApplicationTransmissionLogiqueParfaite extends Application{
-	/**
-	 * Verifier si la sonde est demandee ou pas par l'utilisateur
-	 * @param arg
-	 * 			valeur de l'argument saisi par l'utilisateur
-	 * @return true si la valeur de l'argument est 1
-	 */
-	private static boolean isSondeDemandee(String arg) {
-		return arg.equals("1");
-	}
-
-
+	
 	public void execution(Source<Boolean> src, boolean sonde){
 		
 		//Instanciation d'un objet TransmetteurParfait et DestinationFinale
 		TransmetteurParfait<Boolean, Boolean> trParfait = new TransmetteurParfait<Boolean, Boolean>();
-		DestinationFinale dstFinale = new DestinationFinale();
+		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		//Instanciation des deux sondes logiques
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
@@ -53,7 +50,7 @@ public class ApplicationTransmissionLogiqueParfaite extends Application{
 		}
 
 		System.out.println("Info generee par source          :"
-				+ src.informationGeneree);
+				+ src.getInformationGeneree());
 		System.out.println("Info emise par source            :"
 				+ src.getInformationEmise());
 		System.out.println("Info recue par transmetteur      :"
@@ -65,7 +62,7 @@ public class ApplicationTransmissionLogiqueParfaite extends Application{
 
 		//appel de la fonction de calcul du taux d'erreur binaire
 		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src, dstFinale);
+		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(), dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "+tauxErrBin+"%");
 	}
 }

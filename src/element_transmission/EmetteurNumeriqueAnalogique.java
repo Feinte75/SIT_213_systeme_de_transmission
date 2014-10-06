@@ -1,4 +1,6 @@
-import java.lang.Float;
+package element_transmission;
+import ihm.TypeCodage;
+import exception.InformationNonConforme;
 
 public class EmetteurNumeriqueAnalogique extends
 Transmetteur<Boolean, Float> implements Convertisseur {

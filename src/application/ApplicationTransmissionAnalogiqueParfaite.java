@@ -1,3 +1,14 @@
+package application;
+import ihm.TypeCodage;
+import sonde.SondeAnalogique;
+import sonde.SondeLogique;
+import element_transmission.DestinationFinale;
+import element_transmission.EmetteurNumeriqueAnalogique;
+import element_transmission.RecepteurAnalogiqueNumerique;
+import element_transmission.Source;
+import element_transmission.TransmetteurParfait;
+import exception.InformationNonConforme;
+import element_transmission.*;
 /**
  * 
  * Livrable n�2
@@ -15,7 +26,7 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 		TransmetteurParfait<Float, Float> trParfait = new TransmetteurParfait<Float, Float>();
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
 				min, max, nbEchantillon, codage);
-		DestinationFinale dstFinale = new DestinationFinale();
+		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des deux sondes logiques
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
@@ -57,7 +68,7 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 		}
 
 		System.out.println("Info generee par source          :"
-				+ src.informationGeneree);
+				+ src.getInformationGeneree());
 		System.out.println("Info emise par source            :"
 				+ src.getInformationEmise());
 		System.out.println("Info recue par l'emetteur        :"
@@ -77,7 +88,7 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 
 		// appel de la fonction de calcul du taux d'erreur binaire
 		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src, dstFinale);
+		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(), dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ tauxErrBin + "%");
 	}
