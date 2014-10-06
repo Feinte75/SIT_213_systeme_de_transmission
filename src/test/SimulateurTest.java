@@ -43,10 +43,12 @@ public class SimulateurTest {
 		}
 
 		// tous les parametres valides n°3
-		/*
-		 * String args3[] = { "-form", "RZ" }; try { Simulateur.main(args3); }
-		 * catch (InformationNonConforme e) {fail();}
-		 */
+		String args3[] = { "-form", "RZ" };
+		try {
+			Simulateur.main(args3);
+		} catch (InformationNonConforme e) {
+			fail();
+		}
 
 		// tous les parametres valides n°4
 		String args4[] = { "-form", "nrz" };
