@@ -42,13 +42,14 @@ public class Simulateur {
 		while (i < args.length) { // args[i].length() -> taille de l'argument, args.length -> taille du tableau d'argument
 			switch (args[i]) {
 			case "-etape":
-				if(args[++i].matches("[123]||[45][ab]")) etape = args[i];
+				if(!args[++i].matches("[123]||[45][ab]")) throw new InformationNonConforme("Argument -etape invalide"); 
+				etape = args[i];
 				break;
 			case "-mess":
 				if(!(args[++i].matches("[1|0]+") || args[++i].matches("[0-9]{1,6}")) )
 					//Lever l'exception InformationNonConforme si l'argument n'est pas une suite de 0 et de 1
 					// ou si l'argument n'est pas une suite de chiffres compris entre 0 et 9 Ã  hauteur de 6 chiffes maximum
-					throw new InformationNonConforme("Argument invalide");
+					throw new InformationNonConforme("Argument -mess invalide");
 				message = args[i];
 				break;
 			case "-s":
@@ -57,7 +58,7 @@ public class Simulateur {
 			case "-form":
 				switch(args[++i]){
 				case "RZ": 
-					forme = TypeCodage.NRZ;
+					forme = TypeCodage.RZ;
 					break;
 				case "NRZ":
 					forme = TypeCodage.NRZ;
@@ -65,6 +66,7 @@ public class Simulateur {
 				case "NRZT":
 					forme = TypeCodage.NRZT;
 					break;
+				default : throw new InformationNonConforme("Argument -form invalide");
 				}
 				break;
 			case "-nbech":
@@ -92,9 +94,11 @@ public class Simulateur {
 		System.out.println("Paramètres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
 				" , -ampl =" + amplMin + " et " + amplMax);
 
+		// Generation de la source en fonction du message d'entrée
 		if(isSourceFixe(message)) src = new SourceFixe(message);
 		else if(isSourceAleatoire(message)) src = new SourceAleatoire(message);
 
+		// Choix de l'etape
 		if(etape.equals("1")){
 			ApplicationTransmissionLogiqueParfaite app1 = new ApplicationTransmissionLogiqueParfaite();
 			app1.execution(src, sonde);
