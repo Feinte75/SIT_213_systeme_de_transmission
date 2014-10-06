@@ -8,10 +8,9 @@ import element_transmission.RecepteurAnalogiqueNumerique;
 import element_transmission.Source;
 import element_transmission.TransmetteurParfait;
 import exception.InformationNonConforme;
-import element_transmission.*;
 /**
  * 
- * Livrable n°2
+ * Livrable n 2
  *
  */
 public class ApplicationTransmissionAnalogiqueParfaite extends Application {

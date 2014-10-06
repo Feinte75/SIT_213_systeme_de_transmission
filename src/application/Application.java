@@ -1,7 +1,4 @@
 package application;
-import javax.print.attribute.standard.Destination;
-import javax.xml.transform.Source;
-
 import element_transmission.Information;
 
 
