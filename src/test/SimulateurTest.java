@@ -22,7 +22,7 @@ public class SimulateurTest {
 	}
 
 	@Test
-	public void test() {
+	public void testMain() {
 		// tous les parametres valides n°1
 		String args1[] = { "-etape", "2", "-mess", "9", "-s", "-form", "NRZ",
 				"-nbEch", "1", "-ampl", "1", "2", "-snr", "1", "-ti", "3", "1",
