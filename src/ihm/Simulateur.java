@@ -1,3 +1,11 @@
+package ihm;
+import application.ApplicationTransmissionAnalogiqueParfaite;
+import application.ApplicationTransmissionLogiqueParfaite;
+import element_transmission.Source;
+import element_transmission.SourceAleatoire;
+import element_transmission.SourceFixe;
+import exception.InformationNonConforme;
+
 /**
  * Cette classe permettra de traiter essentiellement la gestion des paramètres
  * décris dans le fichier "commande_unique" sur moodle. Il appelera également

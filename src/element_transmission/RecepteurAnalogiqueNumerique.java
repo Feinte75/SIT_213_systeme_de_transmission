@@ -1,10 +1,14 @@
+package element_transmission;
+import ihm.TypeCodage;
+import exception.InformationNonConforme;
+
 
 public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> implements Convertisseur{
-	
+
 	private Float min, max;
 	private int nbEchantillon;
 	private TypeCodage type;
-	
+
 	public RecepteurAnalogiqueNumerique(float min, float max, int nbEchantillon, TypeCodage type) {
 		super();
 		informationEmise = new Information<Boolean>();
@@ -13,10 +17,10 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 		this.nbEchantillon = nbEchantillon;
 		this.type = type;
 	}
-	
+
 	@Override
 	public void conversion() {
-		
+
 		switch (type) {
 
 		case RZ:
@@ -33,30 +37,30 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 	}
 
 	private void decodageNRZT() {
-		
+
 		for(int i=0; i<informationRecue.nbElements();i+= nbEchantillon){
-			
+
 			for(int j = i; j < i + nbEchantillon; j++){
-				
+
 				if(informationRecue.iemeElement(j/2).floatValue()==max){
 					informationEmise.add(new Boolean(true));
 				}
 				else {
 					informationEmise.add(new Boolean(false));
 				}
-				
+
 			}
 		}
-		
+
 	}
 
 	private void decodageNRZ() {
-		
+
 		float somme = 0;
 		for(int i = 0; i < informationRecue.nbElements(); i+= nbEchantillon){
 
 			for(int j = i; j < i + nbEchantillon; j++){
-				
+
 				somme += informationRecue.iemeElement(j).floatValue();
 			}
 			somme /= nbEchantillon;
@@ -64,18 +68,18 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 			else informationEmise.add(new Boolean(false));
 			somme = 0;
 		}
-		
+
 	}
 
 	private void decodageRZ() {
-		
+
 		for(int i = 0; i < informationRecue.nbElements(); i++){
 
 			for(int j = 0; j < nbEchantillon; j++){
-				
+
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -84,13 +88,13 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> i
 		conversion();
 		super.emettre();
 	}
-	
+
 	@Override
 	public void recevoir(Information<Float> information)
 			throws InformationNonConforme {
 		informationRecue = information;
 
 	}
-	
+
 
 }

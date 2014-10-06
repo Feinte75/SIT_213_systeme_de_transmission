@@ -1,7 +1,10 @@
+package element_transmission;
 
 
 
 import java.util.Random;
+
+import exception.InformationNonConforme;
 /**
  * Classe qui modelise une source aletoire dont la taille de l'infomation emise est choisie par l'utilisateur
  */
