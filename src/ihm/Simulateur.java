@@ -50,7 +50,7 @@ public class Simulateur {
 		while (i < args.length) { // args[i].length() -> taille de l'argument, args.length -> taille du tableau d'argument
 			switch (args[i]) {
 			case "-etape":
-				if(!args[++i].matches("[123]||[45][ab]")) throw new InformationNonConforme("Argument -etape invalide"); 
+				if(!args[++i].matches("[123]||[45][abAB]")) throw new InformationNonConforme("Argument -etape invalide"); 
 				etape = args[i];
 				break;
 			case "-mess":
@@ -64,7 +64,7 @@ public class Simulateur {
 				sonde = true;
 				break;
 			case "-form":
-				switch(args[++i]){
+				switch(args[++i].toUpperCase()){
 				case "RZ": 
 					forme = TypeCodage.RZ;
 					break;
@@ -78,19 +78,24 @@ public class Simulateur {
 				}
 				break;
 			case "-nbech":
-				nbEch = Integer.parseInt(args[++i]);
+				if(!(Integer.parseInt(args[++i]) >= 0)) throw new InformationNonConforme("Argument -nbEch invalide");
+				nbEch = Integer.parseInt(args[i]);
 				break;
 			case "-ampl":
-				amplMin = (float) (Float.parseFloat(args[++i]));
-				amplMax = (float) (Float.parseFloat(args[++i]));
+				float minTemp = (float) (Float.parseFloat(args[++i]));
+				float maxTemp = (float) (Float.parseFloat(args[++i]));
+				if((minTemp>maxTemp)) throw new InformationNonConforme("Argument -ampl invalide");
+				amplMin = minTemp;
+				amplMax = maxTemp;
 				break;
 			case "-snr":
 				rsb = (float) (Float.parseFloat(args[++i]));
 				break;
 			case "-ti":
+				if(!(args[++i].matches("[1-5]"))) throw new InformationNonConforme("Argument -ti invalide");
 				iEmeTrajet = Integer.parseInt(args[i]);
-				decaTempo = Integer.parseInt(args[i]);
-				amplRel = (float) (Float.parseFloat(args[i]));
+				decaTempo = Integer.parseInt(args[++i]);
+				amplRel = (float) (Float.parseFloat(args[++i]));
 				break;
 			case "-transducteur":
 				transducteur = true;
@@ -99,10 +104,10 @@ public class Simulateur {
 			i++;
 		}
 
-		System.out.println("Paramètres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
+		System.out.println("Parametres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
 				" , -ampl =" + amplMin + " et " + amplMax);
 
-		// Generation de la source en fonction du message d'entrée
+		// Generation de la source en fonction du message d'entree
 		if(isSourceFixe(message)) src = new SourceFixe(message);
 		else if(isSourceAleatoire(message)) src = new SourceAleatoire(message);
 
@@ -115,14 +120,14 @@ public class Simulateur {
 			ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
 			app2.execution(src, amplMin, amplMax, nbEch, forme, sonde);
 		}
-		else System.out.println("Etape non codée pour le moment");
+		else System.out.println("Etape non codee pour le moment");
 
 	}
 	/**
 	 * Verifier si l'utilisateur a choisi une source fixe
 	 * @param arg
 	 * 			valeur de l'argument saisi par l'utilisateur
-	 * @return true si la taille de l'argument est supperieure ou egale Ã  7
+	 * @return true si la taille de l'argument est superieure ou egale Ã  7
 	 */
 	private static boolean isSourceFixe(String arg) {
 		return arg.length() >= 7;
