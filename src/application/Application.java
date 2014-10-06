@@ -1,3 +1,9 @@
+package application;
+import javax.print.attribute.standard.Destination;
+import javax.xml.transform.Source;
+
+import element_transmission.Information;
+
 
 public abstract class Application {
 	
@@ -10,10 +16,7 @@ public abstract class Application {
 	 * @param destination La destination de la chaine 
 	 * @return 
 	 */
-	public static float tauxErreurBinaire(Source<Boolean> source,
-			Destination<Boolean> destination) {
-		Information<Boolean> messEmis = source.getInformationEmise();
-		Information<Boolean> messRecu = destination.getInformationRecue();
+	public static float tauxErreurBinaire(Information<Boolean> messEmis, Information<Boolean> messRecu) {
 		float errBinaire = 0;
 		int nbErr = 0;
 		for (int i = 0; i < messEmis.nbElements(); i++) {

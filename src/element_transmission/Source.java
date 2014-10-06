@@ -1,7 +1,10 @@
+package element_transmission;
 
 
 
 import java.util.LinkedList;
+
+import exception.InformationNonConforme;
 
 
 /**
@@ -70,5 +73,9 @@ public abstract class Source<T> implements SourceInterface<T> {
 	 * pour �mettre l'information contenue dans la source
 	 */
 	public abstract void emettre() throws InformationNonConforme;
+
+	public Information<T> getInformationGeneree() {
+		return informationGeneree;
+	}
 
 }

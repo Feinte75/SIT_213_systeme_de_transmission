@@ -1,3 +1,7 @@
+package element_transmission;
+import ihm.TypeCodage;
+import exception.InformationNonConforme;
+
 
 public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean> implements Convertisseur{
 	

@@ -1,8 +1,11 @@
+package element_transmission;
 
 
 
 import java.util.Iterator;
 import java.util.LinkedList;
+
+import exception.InformationNonConforme;
 
 
 /**
