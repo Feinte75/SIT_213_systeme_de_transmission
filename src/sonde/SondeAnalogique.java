@@ -1,6 +1,6 @@
 package sonde;
-import element_transmission.Information;
 import ihm.VueCourbe;
+import element_transmission.Information;
 
 
 

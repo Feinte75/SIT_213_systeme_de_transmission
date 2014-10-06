@@ -7,7 +7,7 @@ import exception.InformationNonConforme;
 
 /**
  * 
- * Livrable n°1
+ * Livrable n 1
  *
  */
 public class ApplicationTransmissionLogiqueParfaite extends Application{
