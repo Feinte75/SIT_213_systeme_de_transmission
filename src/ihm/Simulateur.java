@@ -4,6 +4,7 @@ import application.ApplicationTransmissionLogiqueParfaite;
 import element_transmission.Source;
 import element_transmission.SourceAleatoire;
 import element_transmission.SourceFixe;
+import element_transmission.TypeCodage;
 import exception.InformationNonConforme;
 
 /**
@@ -33,7 +34,7 @@ public class Simulateur {
 		float amplMin = 0.0f;
 		float amplMax = 1.0f;
 		// -snr
-		float rsb = 0.7f;
+		float snr = 0.7f;
 		// -ti
 		int iEmeTrajet = 1;
 		int decaTempo = 0;
@@ -78,18 +79,17 @@ public class Simulateur {
 				}
 				break;
 			case "-nbEch":
-				if(!(Integer.parseInt(args[++i]) >= 0)) throw new InformationNonConforme("Argument -nbEch invalide");
+				if(!(Integer.parseInt(args[++i]) >= 4)) throw new InformationNonConforme("Argument -nbEch invalide");
 				nbEch = Integer.parseInt(args[i]);
 				break;
 			case "-ampl":
-				float minTemp = (float) (Float.parseFloat(args[++i]));
-				float maxTemp = (float) (Float.parseFloat(args[++i]));
-				if((minTemp>maxTemp)) throw new InformationNonConforme("Argument -ampl invalide");
-				amplMin = minTemp;
-				amplMax = maxTemp;
+				amplMin = (float) (Float.parseFloat(args[++i]));
+				amplMax = (float) (Float.parseFloat(args[++i]));
+				if((amplMin>amplMax)) throw new InformationNonConforme("Argument -ampl invalide");
 				break;
 			case "-snr":
-				rsb = (float) (Float.parseFloat(args[++i]));
+				snr = (float) (Float.parseFloat(args[++i]));
+				if(snr < 0) throw new InformationNonConforme("Argument -snr negatif");
 				break;
 			case "-ti":
 				if(!(args[++i].matches("[1-5]"))) throw new InformationNonConforme("Argument -ti invalide");

@@ -69,14 +69,14 @@ public class Information<T> {
 	public boolean equals(Object o) {
 		if (!(o instanceof Information))
 			return false;
-		Information information = (Information) o;
+		Information<T> information = (Information<T>) o;
 		if (this.nbElements() != information.nbElements())
 			return false;
 		for (int i = 0; i < this.nbElements(); i++) {
 			if (!this.iemeElement(i).equals(information.iemeElement(i)))
 				return false;
 		}
-		return true;
+		return true;	
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package ihm;
+package element_transmission;
 
 public enum TypeCodage {
 	

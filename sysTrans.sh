@@ -10,8 +10,7 @@ javac ./sonde/*.java
 #javac ./test/*.java
 
 echo "Generation de la javadoc" 
-
 mkdir javadocSysTrans
 javadoc -d javadocSysTrans ./*/*.java
 
-java ihm.Simulateur -mess 10111101101 -etape 2 -ampl 0 5 -nbech 60 -s -form RZ
+java ihm.Simulateur -mess 10111101101 -etape 2 -ampl 0 5 -nbech 60 -s -form NRZT
