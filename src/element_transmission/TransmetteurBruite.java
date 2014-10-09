@@ -21,7 +21,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		float puissanceBruit, valeurBruit;
 		Random a1 = new Random();
 		Random a2 = new Random();
-
+		
 		puissanceBruit = (float) (puissanceSignal / (Math.pow(10, snr / 10)));
 
 		valeurBruit = (float) (Math.sqrt(puissanceBruit
@@ -35,27 +35,16 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		float somme = 0f;
 
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
-
-			// for (int j = i; j < nbEchantillon; j++) {
-
 			somme += Math.pow(informationRecue.iemeElement(i), 2);
-
-			// }
-
 		}
-
-		return (1 / nbEchantillon) * somme;
+		float moy = (1 / (float) nbEchantillon) * somme;
+		return moy;
 	}
 
 	public void ajoutBruit() {
-
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
-
-			// for (int j = 0; j < nbEchantillon; j++) {
-
 			informationEmise.add(informationRecue.iemeElement(i)
 					+ calculBruit());
-			// }
 		}
 	}
 
@@ -70,7 +59,6 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 			throws InformationNonConforme {
 		informationRecue = information;
 		puissanceSignal = calculPuissanceSignal();
-
 	}
 
 }

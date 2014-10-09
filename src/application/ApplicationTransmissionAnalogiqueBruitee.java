@@ -87,5 +87,4 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ tauxErrBin + "%");
 	}
-	
 }

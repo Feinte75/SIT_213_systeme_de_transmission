@@ -106,7 +106,7 @@ public class Simulateur {
 		}
 
 		System.out.println("Parametres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
-				" , -ampl =" + amplMin + " et " + amplMax);
+				" , -ampl =" + amplMin + " et " + amplMax+" , -snr ="+snr);
 
 		// Generation de la source en fonction du message d'entree
 		if(isSourceFixe(message)) src = new SourceFixe(message);

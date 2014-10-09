@@ -6,5 +6,3 @@ public enum TypeCodage {
 	NRZ,
 	NRZT
 }
-
-//coucou
