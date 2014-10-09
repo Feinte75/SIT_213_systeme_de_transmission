@@ -1,6 +1,7 @@
 package ihm;
 import application.ApplicationTransmissionAnalogiqueParfaite;
 import application.ApplicationTransmissionLogiqueParfaite;
+import application.ApplicationTransmissionAnalogiqueBruitee;
 import element_transmission.Source;
 import element_transmission.SourceAleatoire;
 import element_transmission.SourceFixe;
@@ -119,6 +120,10 @@ public class Simulateur {
 		else if (etape.equals("2")){
 			ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
 			app2.execution(src, amplMin, amplMax, nbEch, forme, sonde);
+		}
+		else if (etape.equals("3")){
+			ApplicationTransmissionAnalogiqueBruitee app3 = new ApplicationTransmissionAnalogiqueBruitee();
+			app3.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr);
 		}
 		else System.out.println("Etape non codee pour le moment");
 
