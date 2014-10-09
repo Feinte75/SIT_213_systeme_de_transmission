@@ -1,5 +1,7 @@
 package element_transmission;
 
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Random;
 
 import exception.InformationNonConforme;
@@ -9,11 +11,14 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	int nbEchantillon = 0;
 	float snr = 0f;
 	float puissanceSignal;
+	LinkedList<Float> valeursBruit;
+	static int histo[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
 	public TransmetteurBruite(int nbEchantillon, float snr) {
 		informationEmise = new Information<Float>();
 		this.nbEchantillon = nbEchantillon;
 		this.snr = snr;
+		valeursBruit = new LinkedList<Float>();
 	}
 
 	public float calculBruit() {
@@ -21,7 +26,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		float puissanceBruit, valeurBruit;
 		Random a1 = new Random();
 		Random a2 = new Random();
-		
+
 		puissanceBruit = (float) (puissanceSignal / (Math.pow(10, snr / 10)));
 
 		valeurBruit = (float) (Math.sqrt(puissanceBruit
@@ -42,15 +47,18 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	}
 
 	public void ajoutBruit() {
+		float vBruit = 0.0f;
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
-			informationEmise.add(informationRecue.iemeElement(i)
-					+ calculBruit());
+			vBruit = calculBruit();
+			informationEmise.add(informationRecue.iemeElement(i) + vBruit);
+			valeursBruit.add(vBruit);
 		}
 	}
 
 	@Override
 	public void emettre() throws InformationNonConforme {
 		ajoutBruit();
+		histogrammeBruit();
 		super.emettre();
 	}
 
@@ -61,4 +69,37 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		puissanceSignal = calculPuissanceSignal();
 	}
 
+	public void histogrammeBruit() {
+		Iterator<Float> itr = valeursBruit.iterator();
+		while (itr.hasNext()) {
+			Float vb = itr.next();
+			if (vb.intValue() == 0) {
+				histo[5]++;
+			} else if (vb.intValue() == 1) {
+				histo[6]++;
+			} else if (vb.intValue() == 2) {
+				histo[7]++;
+			} else if (vb.intValue() == 3) {
+				histo[8]++;
+			} else if (vb.intValue() == 4) {
+				histo[9]++;
+			} else if (vb.intValue() == 5) {
+				histo[10]++;
+			} else if (vb.intValue() == -1) {
+				histo[4]++;
+			} else if (vb.intValue() == -2) {
+				histo[3]++;
+			} else if (vb.intValue() == -3) {
+				histo[2]++;
+			} else if (vb.intValue() == -4) {
+				histo[1]++;
+			} else if (vb.intValue() == -5) {
+				histo[0]++;
+			}
+		}
+	}
+	
+	public static int[] getTableauHistogramme(){
+		return histo;
+	}
 }

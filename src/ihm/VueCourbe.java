@@ -179,7 +179,5 @@ public class VueCourbe extends Vue {
 			getContentPane().getGraphics().drawLine(x0Axe + x1, y0Axe - y1,
 					x0Axe + x2, y0Axe - y2);
 		}
-
 	}
-
 }
