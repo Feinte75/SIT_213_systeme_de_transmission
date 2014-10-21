@@ -28,9 +28,9 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		Random a2 = new Random();
 
 		puissanceBruit = (float) (puissanceSignal / (Math.pow(10, snr / 10)));
-
-		valeurBruit = (float) (Math.sqrt(puissanceBruit
-				* (-2 * Math.log(1 - a1.nextFloat()))) * Math.cos(2 * Math.PI
+		
+		valeurBruit = (float) (Math.sqrt(puissanceBruit) * 
+				Math.sqrt(-2 * Math.log(1 - a1.nextFloat())) * Math.cos(2 * Math.PI
 				* a2.nextFloat()));
 		return valeurBruit;
 
@@ -40,9 +40,9 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		float somme = 0f;
 
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
-			somme += Math.pow(informationRecue.iemeElement(i), 2);
+			somme += Math.pow(informationRecue.iemeElement(i).floatValue(), 2);
 		}
-		float moy = (1 / (float) nbEchantillon) * somme;
+		float moy = (1 / (float)informationRecue.nbElements()) * somme;
 		return moy;
 	}
 
@@ -50,7 +50,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		float vBruit = 0.0f;
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
 			vBruit = calculBruit();
-			informationEmise.add(informationRecue.iemeElement(i) + vBruit);
+			informationEmise.add(informationRecue.iemeElement(i).floatValue() + vBruit);
 			valeursBruit.add(vBruit);
 		}
 	}
@@ -71,6 +71,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 
 	public void histogrammeBruit() {
 		Iterator<Float> itr = valeursBruit.iterator();
+		
 		while (itr.hasNext()) {
 			Float vb = itr.next();
 			if (vb.intValue() == 0) {
