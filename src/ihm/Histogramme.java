@@ -70,13 +70,6 @@ public class Histogramme extends JFrame {
 		// Initialisation des valeurs.
 		this.valeurs = new int[11];
 		this.valeurs = TransmetteurBruite.getTableauHistogramme();
-//		System.out.println(valeurs);
-//		this.valeurs[0] = 12;
-//		this.valeurs[1] = 10;
-//		this.valeurs[2] = 17;
-//		this.valeurs[3] = 5;
-//		this.valeurs[4] = 13;
-//		this.valeurs[5] = 8;
 		this.max = 40;
 
 		// Initialisation des couleurs.
