@@ -132,6 +132,7 @@ public class VueCourbe extends Vue {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.setColor(Color.black);
 
+		setForeground(Color.BLACK);
 		int x0Axe = 10;
 		float deltaX = getContentPane().getWidth() - (2 * x0Axe);
 
@@ -171,6 +172,8 @@ public class VueCourbe extends Vue {
 			dy = -(deltaY / yMin);
 		}
 
+		setIgnoreRepaint(true);
+		setForeground(Color.PINK);
 		for (int i = 1; i < coordonnees.length; i++) {
 			int x1 = (int) (coordonnees[i - 1].getX() * dx);
 			int x2 = (int) (coordonnees[i].getX() * dx);

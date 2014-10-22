@@ -124,7 +124,6 @@ public class Simulateur {
 		else if (etape.equals("3")){
 			ApplicationTransmissionAnalogiqueBruitee app3 = new ApplicationTransmissionAnalogiqueBruitee();
 			app3.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr);
-			Histogramme.main(null);
 		}
 		else System.out.println("Etape non codee pour le moment");
 

@@ -1,5 +1,5 @@
 package element_transmission;
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * 
@@ -7,13 +7,13 @@ import java.util.LinkedList;
  */
 public class Information<T> {
 
-	private LinkedList<T> content;
+	private ArrayList<T> content;
 
 	/**
 	 * pour construire une information vide
 	 */
 	public Information() {
-		this.content = new LinkedList<T>();
+		this.content = new ArrayList<T>();
 	}
 
 	/**
@@ -24,7 +24,7 @@ public class Information<T> {
 	 *            construite
 	 */
 	public Information(T[] content) {
-		this.content = new LinkedList<T>();
+		this.content = new ArrayList<T>();
 		for (int i = 0; i < content.length; i++) {
 			this.content.add(content[i]);
 		}

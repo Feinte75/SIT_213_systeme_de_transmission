@@ -1,9 +1,13 @@
 package element_transmission;
 
+import java.text.DecimalFormat;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
+import sonde.SondeAnalogique;
 import exception.InformationNonConforme;
 
 /**
@@ -18,7 +22,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	float snr = 0f;
 	float puissanceSignal;
 	LinkedList<Float> valeursBruit;
-	static int histo[] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+	HashMap<Float, Integer> mapHisto;
 
 	/**
 	 * Constructeur du transmetteur bruité
@@ -31,6 +35,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		this.nbEchantillon = nbEchantillon;
 		this.snr = snr;
 		valeursBruit = new LinkedList<Float>();
+		mapHisto = new HashMap<Float, Integer>();
 	}
 
 	/**
@@ -91,7 +96,8 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * Méthode pour emettre l'information bruité au récepteur de la chaine de transmsission
+	 * Méthode pour emettre l'information bruité au récepteur de la chaine de
+	 * transmsission
 	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
@@ -101,7 +107,8 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * Méthode pour recevoir l'information analogique de l'emetteur de la chaine de transmission
+	 * Méthode pour recevoir l'information analogique de l'emetteur de la chaine
+	 * de transmission
 	 */
 	@Override
 	public void recevoir(Information<Float> information)
@@ -111,44 +118,42 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	}
 
 	/**
-	 * Méthode pour générer un histogramme représentant les valeurs du bruit blanc gaussien.
+	 * Méthode pour générer un histogramme représentant les valeurs du bruit
+	 * blanc gaussien.
 	 */
 	public void histogrammeBruit() {
 		Iterator<Float> itr = valeursBruit.iterator();
-
+		float vb;
+		Integer val;
 		while (itr.hasNext()) {
-			Float vb = itr.next();
-			if (vb.intValue() == 0) {
-				histo[5]++;
-			} else if (vb.intValue() == 1) {
-				histo[6]++;
-			} else if (vb.intValue() == 2) {
-				histo[7]++;
-			} else if (vb.intValue() == 3) {
-				histo[8]++;
-			} else if (vb.intValue() == 4) {
-				histo[9]++;
-			} else if (vb.intValue() == 5) {
-				histo[10]++;
-			} else if (vb.intValue() == -1) {
-				histo[4]++;
-			} else if (vb.intValue() == -2) {
-				histo[3]++;
-			} else if (vb.intValue() == -3) {
-				histo[2]++;
-			} else if (vb.intValue() == -4) {
-				histo[1]++;
-			} else if (vb.intValue() == -5) {
-				histo[0]++;
+			vb = itr.next();
+			// regard de l'occurence d'un élément
+			vb = (float) (Math.round((vb*100.0))/100.0);
+			val = mapHisto.get(vb);
+			if (val != null) {
+				mapHisto.put(vb, val+1);
+			} else {
+				mapHisto.put(vb, 1);
 			}
 		}
-	}
 
-	/**
-	 * Méthode permettant de retourner le tableau de l'histogramme du bruit
-	 * @return
-	 */
-	public static int[] getTableauHistogramme() {
-		return histo;
+		// créer une liste triée en fonction des valeursBruit de la hashmap
+		LinkedList<Float> triHisto = new LinkedList<Float>(mapHisto.keySet());
+		Collections.sort(triHisto);
+
+		// création information occurence
+		Information<Float> occHisto = new Information<Float>();
+		Iterator<Float> itrHisto = triHisto.iterator();
+		Float keyValeursBruit;
+		float occValeursBruit;
+		while (itrHisto.hasNext()) {
+			keyValeursBruit = itrHisto.next();
+			occValeursBruit = mapHisto.get(keyValeursBruit);
+			occHisto.add(occValeursBruit);
+		}
+		
+		//envoi à la sonde
+		SondeAnalogique sa= new SondeAnalogique("Répartition du bruit");
+		sa.recevoir(occHisto);
 	}
 }

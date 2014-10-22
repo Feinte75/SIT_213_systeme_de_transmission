@@ -10,15 +10,19 @@ import element_transmission.Source;
 import element_transmission.TransmetteurBruite;
 import exception.InformationNonConforme;
 
+/**
+ * Livrable n°3
+ *
+ */
 public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 
-	public void execution(Source<Boolean> src, float min, float max, int nbEchantillon,
-			TypeCodage codage, boolean sonde, float snr) {
+	public void execution(Source<Boolean> src, float min, float max,
+			int nbEchantillon, TypeCodage codage, boolean sonde, float snr) {
 
 		// Instanciation d'un objet Transmetteurbruite et DestinationFinale
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
 				max, nbEchantillon, codage);
-		TransmetteurBruite  trBruite  = new TransmetteurBruite (nbEchantillon, snr) ;
+		TransmetteurBruite trBruite = new TransmetteurBruite(nbEchantillon, snr);
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
 				min, max, nbEchantillon, codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
@@ -83,7 +87,8 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 
 		// appel de la fonction de calcul du taux d'erreur binaire
 		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(), dstFinale.getInformationRecue());
+		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(),
+				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ tauxErrBin + "%");
 	}
