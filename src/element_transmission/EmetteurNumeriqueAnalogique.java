@@ -2,6 +2,11 @@ package element_transmission;
 
 import exception.InformationNonConforme;
 
+/**
+ * 
+ * Cette classe permet de simuler le composant "Emetteur Numerique Analogique"
+ * 
+ */
 public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 		implements Convertisseur {
 
@@ -9,6 +14,18 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	private int nbEchantillon;
 	private TypeCodage type;
 
+	/**
+	 * Constructeur de la classe EmetteurNumeriqueAnalogique
+	 * 
+	 * @param min
+	 *            Valeur min du signal
+	 * @param max
+	 *            Valeur max du signal
+	 * @param nbEchantillon
+	 *            Nombre d'Èchantillons par symbole
+	 * @param type
+	 *            Type du codage utilisÈ lors de la conversion
+	 */
 	public EmetteurNumeriqueAnalogique(float min, float max, int nbEchantillon,
 			TypeCodage type) {
 		super();
@@ -19,6 +36,9 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 		this.type = type;
 	}
 
+	/**
+	 * MÈthode d'appel des types de conversion numÈrique analogique
+	 */
 	@Override
 	public void conversion() {
 
@@ -37,7 +57,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage retour √† z√©ro. Signal √† min ou max pendant 1/2 symbole puis 0
+	 * Codage retour ‡† zero. Signal ‡† min ou max pendant 1/2 symbole puis 0
 	 * ensuite
 	 */
 	public void codageRZ() {
@@ -62,7 +82,8 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage Non Retour √† Z√©ro. Signal √† max pour un "1" et √† min pour un "0"
+	 * Codage Non Retour ‡† ZÈro. Signal ‡† max pour un "1" et ‡† min pour un
+	 * "0"
 	 */
 	public void codageNRZ() {
 
@@ -79,9 +100,10 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage Non Retour √† Z√©ro Triangulaire. Pour un "1", pente montante de min
-	 * √† max durant 1/3 de la p√©riode, plateau √† max pendant 1 autre tier puis
-	 * pente descendante jusqu'√† min pendant le dernier tier de la p√©riode
+	 * Codage Non Retour ‡† ZÈro Triangulaire. Pour un "1", pente montante de
+	 * min √† max durant 1/3 de la p√©riode, plateau √† max pendant 1 autre tier
+	 * puis pente descendante jusqu'√† min pendant le dernier tier de la
+	 * p√©riode
 	 */
 	public void codageNRZT() {
 
@@ -116,6 +138,9 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 		}
 	}
 
+	/**
+	 * MÈthode d'emission de l'information
+	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
 
@@ -123,6 +148,9 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 		super.emettre();
 	}
 
+	/**
+	 * MÈthode de rÈception de l'information
+	 */
 	@Override
 	public void recevoir(Information<Boolean> information)
 			throws InformationNonConforme {

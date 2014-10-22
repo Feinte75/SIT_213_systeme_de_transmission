@@ -11,15 +11,35 @@ import element_transmission.TransmetteurBruite;
 import exception.InformationNonConforme;
 
 /**
- * Livrable nÂ°3
- *
+ * Cette classe permet simuler la chaine de transmission dans le cas où le
+ * signat est burité par le transmetteur
+ * 
  */
 public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 
+	/**
+	 * Méthode qui englobe la création et la connexion des composants de la
+	 * chaîne de transmission dans le cas du signal bruité
+	 * 
+	 * @param src
+	 *            Suite de symboles binaires
+	 * @param min
+	 *            Valeur min du signal
+	 * @param max
+	 *            Valeur max du signal
+	 * @param nbEchantillon
+	 *            Nombre d'échantillons par symbole
+	 * @param codage
+	 *            Type du codage à utiliser
+	 * @param sonde
+	 *            Spécifie l'utilisation ou pas de la sonde
+	 * @param snr
+	 *            Rapport signal à bruit de la simulation
+	 */
 	public void execution(Source<Boolean> src, float min, float max,
 			int nbEchantillon, TypeCodage codage, boolean sonde, float snr) {
 
-		// Instanciation d'un objet Transmetteurbruite et DestinationFinale
+		// Instanciation des composants de la chaine de transmission
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
 				max, nbEchantillon, codage);
 		TransmetteurBruite trBruite = new TransmetteurBruite(nbEchantillon, snr);
@@ -27,7 +47,7 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 				min, max, nbEchantillon, codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
-		// Instanciation des deux sondes logiques
+		// Instanciation des sondes
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
 				"Signal emis par le transmetteur");
@@ -36,8 +56,7 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		SondeLogique sondeRecepteur = new SondeLogique(
 				"Signal emis par le recepteur");
 
-		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
-		// choisi d'utiliser les sondes
+
 
 		// Connecter le transmetteur bruite a la source
 		src.connecter(ena);
@@ -45,8 +64,12 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		ena.connecter(trBruite);
 		trBruite.connecter(ran);
 		ran.connecter(dstFinale);
-		// Connecter les sondes a chaque composant
+		
+		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
+		// choisi d'utiliser les sondes
 		if (sonde) {
+			
+			// Connecter les sondes a chaque composant
 			src.connecter(sondeSource);
 			ena.connecter(sondeEmetteur);
 
@@ -55,10 +78,10 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		}
 
 		try {
-			// Emission de la source
+			// Emission de la source et de l'emetteur
 			src.emettre();
 			ena.emettre();
-			// Emission du transmetteur bruite
+			// Emission du transmetteur bruite et du recepteur vers la destination finale
 			trBruite.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
