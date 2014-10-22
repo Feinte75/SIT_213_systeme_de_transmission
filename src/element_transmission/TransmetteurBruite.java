@@ -153,7 +153,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		}
 		
 		//envoi à la sonde
-		SondeAnalogique sa= new SondeAnalogique("Répartition du bruit");
+		SondeAnalogique sa= new SondeAnalogique("Histogramme de répartition du bruit");
 		sa.recevoir(occHisto);
 	}
 }

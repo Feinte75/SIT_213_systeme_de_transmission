@@ -1,6 +1,5 @@
 package ihm;
 
-
 /** 
  * @author B. Prou
  *
@@ -146,8 +145,10 @@ public class VueCourbe extends Vue {
 		} else if (yMax <= 0) {
 			y0Axe += 0;
 		}
+		//ligne de l'axe des abscisses
 		getContentPane().getGraphics().drawLine(x0Axe, y0Axe,
 				x0Axe + (int) deltaX + x0Axe, y0Axe);
+		// fleche de l'axe des abscisses
 		getContentPane().getGraphics().drawLine(
 				x0Axe + (int) deltaX + x0Axe - 5, y0Axe - 5,
 				x0Axe + (int) deltaX + x0Axe, y0Axe);
@@ -155,8 +156,10 @@ public class VueCourbe extends Vue {
 				x0Axe + (int) deltaX + x0Axe - 5, y0Axe + 5,
 				x0Axe + (int) deltaX + x0Axe, y0Axe);
 
+		//ligne de l'axe des ordonnées
 		getContentPane().getGraphics().drawLine(x0Axe, y0Axe, x0Axe,
-				y0Axe - (int) deltaY - y0Axe);
+				- (int) deltaY);
+		// fleche de l'axe des ordonnée
 		getContentPane().getGraphics().drawLine(x0Axe + 5, 5, x0Axe, 0);
 		getContentPane().getGraphics().drawLine(x0Axe - 5, 5, x0Axe, 0);
 
