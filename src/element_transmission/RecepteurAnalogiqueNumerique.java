@@ -2,6 +2,14 @@ package element_transmission;
 
 import exception.InformationNonConforme;
 
+/**
+ * 
+ * Classe représentant un élément de la chaine de transmission générale. Le
+ * récepteur se situe entre le transmetteur et la destination. Ce recepteur
+ * permet de convertire le signal analogique reçu depuis le transmetteur en
+ * signal numérique pour le transmettre à la destination.
+ *
+ */
 public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 		implements Convertisseur {
 
@@ -9,6 +17,18 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 	private int nbEchantillon;
 	private TypeCodage type;
 
+	/**
+	 * Constructeur de la classe RecepteurAnalogiqueNumerique
+	 * 
+	 * @param min
+	 *            Minimum du signal
+	 * @param max
+	 *            Maximum du signal
+	 * @param nbEchantillon
+	 *            Nombre d'échantillon
+	 * @param type
+	 *            Type de codage
+	 */
 	public RecepteurAnalogiqueNumerique(float min, float max,
 			int nbEchantillon, TypeCodage type) {
 		super();
@@ -19,6 +39,10 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 		this.type = type;
 	}
 
+	/**
+	 * Méthode de conversion d'un String reçu (pour le type de codage) en une
+	 * méthode associée : decodageRZ(), decodageNRZ() ou decodageNRZT()
+	 */
 	@Override
 	public void conversion() {
 
@@ -44,7 +68,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 
 		for (int i = nbEchantillon / 2; i < informationRecue.nbElements(); i += nbEchantillon) {
 
-			if (informationRecue.iemeElement(i).floatValue() >= (max-min)/2) {
+			if (informationRecue.iemeElement(i).floatValue() >= (max - min) / 2) {
 				informationEmise.add(new Boolean(true));
 			} else {
 				informationEmise.add(new Boolean(false));
@@ -84,7 +108,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 
 		for (int i = nbEchantillon / 4; i < informationRecue.nbElements(); i += nbEchantillon) {
 
-			if (informationRecue.iemeElement(i).floatValue() >= (max-min)/2) {
+			if (informationRecue.iemeElement(i).floatValue() >= (max - min) / 2) {
 				informationEmise.add(new Boolean(true));
 			} else {
 				informationEmise.add(new Boolean(false));
@@ -92,6 +116,10 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 		}
 	}
 
+	/**
+	 * Méthode pour emettre le signal analogique converti en numérique à la
+	 * destination (dernier élément de la chaine).
+	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
 
@@ -99,6 +127,9 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 		super.emettre();
 	}
 
+	/**
+	 * Méthode pour recevoir les informations analogique du Transmetteur
+	 */
 	@Override
 	public void recevoir(Information<Float> information)
 			throws InformationNonConforme {

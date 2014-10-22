@@ -1,4 +1,5 @@
 package application;
+
 import sonde.SondeAnalogique;
 import sonde.SondeLogique;
 import element_transmission.DestinationFinale;
@@ -8,16 +9,38 @@ import element_transmission.Source;
 import element_transmission.TransmetteurParfait;
 import element_transmission.TypeCodage;
 import exception.InformationNonConforme;
+
 /**
  * 
- * Livrable n 2
+ * Cette classe correspond à l'application développée pour le livrable numéro 2
+ * La chaine de transmission déduite de cette application est composée de : une
+ * source, un emetteur, un transmetteur, un recepteur et une destination. Des
+ * sondes sont connectés à ces éléments de la chaine pour observer : le signal
+ * émit par la source, l'emetteur, le transmetteur et le recepteur, puis le
+ * signal reçu par la destination. Ainsi le taux d'erreur binaire peut être
+ * défini en comparant le message envoyé du message reçu.
  *
  */
 public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 
-
-	public void execution(Source<Boolean> src, float min, float max, int nbEchantillon,
-			TypeCodage codage, boolean sonde) {
+	/**
+	 * Méthode déroulant l'application de transmission analogique parfaite
+	 * 
+	 * @param src
+	 *            Suite de symbole binaire
+	 * @param min
+	 *            Minimum du signal
+	 * @param max
+	 *            Maximum du signal
+	 * @param nbEchantillon
+	 *            Nombre d'échantillon
+	 * @param codage
+	 *            Type de codage utilisé
+	 * @param sonde
+	 *            Utilisation des sondes ou non
+	 */
+	public void execution(Source<Boolean> src, float min, float max,
+			int nbEchantillon, TypeCodage codage, boolean sonde) {
 
 		// Instanciation d'un objet TransmetteurParfait et DestinationFinale
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
@@ -87,7 +110,8 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 
 		// appel de la fonction de calcul du taux d'erreur binaire
 		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(), dstFinale.getInformationRecue());
+		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(),
+				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ tauxErrBin + "%");
 	}

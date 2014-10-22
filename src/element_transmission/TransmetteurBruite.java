@@ -128,10 +128,10 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		while (itr.hasNext()) {
 			vb = itr.next();
 			// regard de l'occurence d'un élément
-			vb = (float) (Math.round((vb*100.0))/100.0);
+			vb = (float) (Math.round((vb * 100.0)) / 100.0);
 			val = mapHisto.get(vb);
 			if (val != null) {
-				mapHisto.put(vb, val+1);
+				mapHisto.put(vb, val + 1);
 			} else {
 				mapHisto.put(vb, 1);
 			}
@@ -151,9 +151,10 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 			occValeursBruit = mapHisto.get(keyValeursBruit);
 			occHisto.add(occValeursBruit);
 		}
-		
-		//envoi à la sonde
-		SondeAnalogique sa= new SondeAnalogique("Histogramme de répartition du bruit");
+
+		// envoi à la sonde
+		SondeAnalogique sa = new SondeAnalogique(
+				"Histogramme de répartition du bruit");
 		sa.recevoir(occHisto);
 	}
 }
