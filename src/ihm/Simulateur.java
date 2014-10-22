@@ -1,4 +1,5 @@
 package ihm;
+
 import application.ApplicationTransmissionAnalogiqueParfaite;
 import application.ApplicationTransmissionLogiqueParfaite;
 import application.ApplicationTransmissionAnalogiqueBruitee;
@@ -12,8 +13,6 @@ import exception.InformationNonConforme;
  * Cette classe permettra de traiter essentiellement la gestion des paramètres
  * décris dans le fichier "commande_unique" sur moodle. Il appelera également
  * les différentes applications (suivant les différents séances/livrables).
- * 
- * @author rodolphemartinez
  *
  */
 public class Simulateur {
@@ -49,16 +48,21 @@ public class Simulateur {
 		// traitement des arguments
 		int i = 0;
 
-		while (i < args.length) { // args[i].length() -> taille de l'argument, args.length -> taille du tableau d'argument
+		while (i < args.length) { // args[i].length() -> taille de l'argument,
+									// args.length -> taille du tableau
+									// d'argument
 			switch (args[i]) {
 			case "-etape":
-				if(!args[++i].matches("[123]||[45][abAB]")) throw new InformationNonConforme("Argument -etape invalide"); 
+				if (!args[++i].matches("[123]||[45][abAB]"))
+					throw new InformationNonConforme("Argument -etape invalide");
 				etape = args[i];
 				break;
 			case "-mess":
-				if(!(args[++i].matches("[1|0]+||[0-9]{1,6}")))
-					//Lever l'exception InformationNonConforme si l'argument n'est pas une suite de 0 et de 1
-					// ou si l'argument n'est pas une suite de chiffres compris entre 0 et 9 à hauteur de 6 chiffes maximum
+				if (!(args[++i].matches("[1|0]+||[0-9]{1,6}")))
+					// Lever l'exception InformationNonConforme si l'argument
+					// n'est pas une suite de 0 et de 1
+					// ou si l'argument n'est pas une suite de chiffres compris
+					// entre 0 et 9 à hauteur de 6 chiffes maximum
 					throw new InformationNonConforme("Argument -mess invalide");
 				message = args[i];
 				break;
@@ -66,8 +70,8 @@ public class Simulateur {
 				sonde = true;
 				break;
 			case "-form":
-				switch(args[++i].toUpperCase()){
-				case "RZ": 
+				switch (args[++i].toUpperCase()) {
+				case "RZ":
 					forme = TypeCodage.RZ;
 					break;
 				case "NRZ":
@@ -76,24 +80,29 @@ public class Simulateur {
 				case "NRZT":
 					forme = TypeCodage.NRZT;
 					break;
-				default : throw new InformationNonConforme("Argument -form invalide");
+				default:
+					throw new InformationNonConforme("Argument -form invalide");
 				}
 				break;
 			case "-nbEch":
-				if(!(Integer.parseInt(args[++i]) >= 4)) throw new InformationNonConforme("Argument -nbEch invalide");
+				if (!(Integer.parseInt(args[++i]) >= 4))
+					throw new InformationNonConforme("Argument -nbEch invalide");
 				nbEch = Integer.parseInt(args[i]);
 				break;
 			case "-ampl":
 				amplMin = (float) (Float.parseFloat(args[++i]));
 				amplMax = (float) (Float.parseFloat(args[++i]));
-				if((amplMin>amplMax)) throw new InformationNonConforme("Argument -ampl invalide");
+				if ((amplMin > amplMax))
+					throw new InformationNonConforme("Argument -ampl invalide");
 				break;
 			case "-snr":
 				snr = (float) (Float.parseFloat(args[++i]));
-				if(snr < 0) throw new InformationNonConforme("Argument -snr negatif");
+				if (snr < 0)
+					throw new InformationNonConforme("Argument -snr negatif");
 				break;
 			case "-ti":
-				if(!(args[++i].matches("[1-5]"))) throw new InformationNonConforme("Argument -ti invalide");
+				if (!(args[++i].matches("[1-5]")))
+					throw new InformationNonConforme("Argument -ti invalide");
 				iEmeTrajet = Integer.parseInt(args[i]);
 				decaTempo = Integer.parseInt(args[++i]);
 				amplRel = (float) (Float.parseFloat(args[++i]));
@@ -105,42 +114,48 @@ public class Simulateur {
 			i++;
 		}
 
-		System.out.println("Parametres : -etape =" + etape +" , -mess =" + message + " , -s =" + sonde + " , -form =" + forme + " , -nbEch =" + nbEch +
-				" , -ampl =" + amplMin + " et " + amplMax+" , -snr ="+snr);
+		System.out.println("Parametres : -etape =" + etape + " , -mess ="
+				+ message + " , -s =" + sonde + " , -form =" + forme
+				+ " , -nbEch =" + nbEch + " , -ampl =" + amplMin + " et "
+				+ amplMax + " , -snr =" + snr);
 
 		// Generation de la source en fonction du message d'entree
-		if(isSourceFixe(message)) src = new SourceFixe(message);
-		else if(isSourceAleatoire(message)) src = new SourceAleatoire(message);
+		if (isSourceFixe(message))
+			src = new SourceFixe(message);
+		else if (isSourceAleatoire(message))
+			src = new SourceAleatoire(message);
 
 		// Choix de l'etape
-		if(etape.equals("1")){
+		if (etape.equals("1")) {
 			ApplicationTransmissionLogiqueParfaite app1 = new ApplicationTransmissionLogiqueParfaite();
 			app1.execution(src, sonde);
-		}
-		else if (etape.equals("2")){
+		} else if (etape.equals("2")) {
 			ApplicationTransmissionAnalogiqueParfaite app2 = new ApplicationTransmissionAnalogiqueParfaite();
 			app2.execution(src, amplMin, amplMax, nbEch, forme, sonde);
-		}
-		else if (etape.equals("3")){
+		} else if (etape.equals("3")) {
 			ApplicationTransmissionAnalogiqueBruitee app3 = new ApplicationTransmissionAnalogiqueBruitee();
 			app3.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr);
-		}
-		else System.out.println("Etape non codee pour le moment");
+		} else
+			System.out.println("Etape non codee pour le moment");
 
 	}
+
 	/**
 	 * Verifier si l'utilisateur a choisi une source fixe
+	 * 
 	 * @param arg
-	 * 			valeur de l'argument saisi par l'utilisateur
+	 *            valeur de l'argument saisi par l'utilisateur
 	 * @return true si la taille de l'argument est superieure ou egale à 7
 	 */
 	private static boolean isSourceFixe(String arg) {
 		return arg.length() >= 7;
 	}
+
 	/**
 	 * Verifier si l'utilisateur a choisi une source aleatoire
+	 * 
 	 * @param arg
-	 * 			valeur de l'argument saisi par l'utilisateur
+	 *            valeur de l'argument saisi par l'utilisateur
 	 * @return true si la taille de l'argument est comprise entre 0 est 6 inclus
 	 */
 	private static boolean isSourceAleatoire(String arg) {
