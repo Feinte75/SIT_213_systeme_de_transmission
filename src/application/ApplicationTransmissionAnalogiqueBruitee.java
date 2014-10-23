@@ -92,10 +92,8 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		}
 		histogramme.recevoir(trBruite.getHistogramme());
 		System.out.println("*************************************************************************************************************");
-		System.out.println("*************************************** Type de codage : "+codage+" *****************************************");
-		System.out.println("*************************************************************************************************************");
-		System.out.println("Info generee par source          :"
-				+ src.getInformationGeneree());
+//		System.out.println("Info generee par source          :"
+//				+ src.getInformationGeneree());
 //		System.out.println("Info emise par source            :"
 //				+ src.getInformationEmise());
 //		System.out.println("Info recue par l'emetteur        :"
@@ -108,16 +106,16 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 //				+ trBruite.getInformationEmise());
 //		System.out.println("Info recue par le recepteur      :"
 //				+ ran.getInformationRecue());
-		System.out.println("Info emise par le recepteur      :"
-				+ ran.getInformationEmise());
-		System.out.println("Info recue par destination finale:"
-				+ dstFinale.getInformationRecue());
+//		System.out.println("Info emise par le recepteur      :"
+//				+ ran.getInformationEmise());
+//		System.out.println("Info recue par destination finale:"
+//				+ dstFinale.getInformationRecue());
 
 		// appel de la fonction de calcul du taux d'erreur binaire
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ teb + "%");
-		System.out.println("***********************************************************************************************************************");
+		System.out.println("*************************************************************************************************************");
 	}
 }
