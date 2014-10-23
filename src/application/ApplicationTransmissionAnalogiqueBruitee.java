@@ -94,18 +94,18 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 
 		System.out.println("Info generee par source          :"
 				+ src.getInformationGeneree());
-		System.out.println("Info emise par source            :"
-				+ src.getInformationEmise());
-		System.out.println("Info recue par l'emetteur        :"
-				+ ena.getInformationRecue());
-		System.out.println("Info emise par l'emetteur        :"
-				+ ena.getInformationEmise());
-		System.out.println("Info recue par le transmetteur   :"
-				+ trBruite.getInformationRecue());
-		System.out.println("Info emise par le transmetteur   :"
-				+ trBruite.getInformationEmise());
-		System.out.println("Info recue par le recepteur      :"
-				+ ran.getInformationRecue());
+//		System.out.println("Info emise par source            :"
+//				+ src.getInformationEmise());
+//		System.out.println("Info recue par l'emetteur        :"
+//				+ ena.getInformationRecue());
+//		System.out.println("Info emise par l'emetteur        :"
+//				+ ena.getInformationEmise());
+//		System.out.println("Info recue par le transmetteur   :"
+//				+ trBruite.getInformationRecue());
+//		System.out.println("Info emise par le transmetteur   :"
+//				+ trBruite.getInformationEmise());
+//		System.out.println("Info recue par le recepteur      :"
+//				+ ran.getInformationRecue());
 		System.out.println("Info emise par le recepteur      :"
 				+ ran.getInformationEmise());
 		System.out.println("Info recue par destination finale:"
