@@ -107,6 +107,22 @@ public class ApplicationTest {
 		teb /= 50;
 		assertTrue(teb < 10f);
 		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZ, false, 20f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb < 10f);
+		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.RZ, false, 20f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb < 10f);
+		
 		// Test SNR faible
 		teb = 0;
 		for(int i = 0; i < 50; i++){
@@ -116,6 +132,21 @@ public class ApplicationTest {
 		teb /= 50;
 		assertTrue(teb > 10f);
 		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZ, false, 0.7f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb > 10f);
+		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.RZ, false, 0.7f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb > 10f);
 		
 		
 	}
