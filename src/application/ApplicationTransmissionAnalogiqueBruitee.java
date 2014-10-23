@@ -50,9 +50,9 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		// Instanciation des sondes
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source", "Temps", "Valeur logique");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
-				"Signal emis par le transmetteur", "Temps", "Volt");
+				"Signal emis par le transmetteur", "Temps", "Amplitude");
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
-				"Signal emis par l'emetteur", "Temps", "Volt");
+				"Signal emis par l'emetteur", "Temps", "Amplitude");
 		SondeLogique sondeRecepteur = new SondeLogique(
 				"Signal emis par le recepteur", "Temps", "Valeur logique");
 		

@@ -105,7 +105,7 @@ public class ApplicationTest {
 			teb += app.getTeb();
 		}
 		teb /= 50;
-		assertTrue(teb < 1f);
+		assertTrue(teb < 10f);
 		
 		// Test SNR faible
 		teb = 0;
@@ -114,7 +114,7 @@ public class ApplicationTest {
 			teb += app.getTeb();
 		}
 		teb /= 50;
-		assertTrue(teb < 1f);
+		assertTrue(teb > 10f);
 		
 		
 		

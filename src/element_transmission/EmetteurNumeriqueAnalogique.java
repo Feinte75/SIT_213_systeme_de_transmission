@@ -22,9 +22,9 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	 * @param max
 	 *            Valeur max du signal
 	 * @param nbEchantillon
-	 *            Nombre d'échantillons par symbole
+	 *            Nombre d'ï¿½chantillons par symbole
 	 * @param type
-	 *            Type du codage utilisé lors de la conversion
+	 *            Type du codage utilisï¿½ lors de la conversion
 	 */
 	public EmetteurNumeriqueAnalogique(float min, float max, int nbEchantillon,
 			TypeCodage type) {
@@ -37,7 +37,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Méthode d'appel des types de conversion numérique analogique
+	 * Mï¿½thode d'appel des types de conversion numï¿½rique analogique
 	 */
 	@Override
 	public void conversion() {
@@ -57,7 +57,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage retour à  zero. Signal à  min ou max pendant 1/2 symbole puis 0
+	 * Codage retour ï¿½ zero. Signal ï¿½ min ou max pendant 1/2 symbole puis 0
 	 * ensuite
 	 */
 	public void codageRZ() {
@@ -82,7 +82,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage Non Retour à  Zéro. Signal à  max pour un "1" et à  min pour un
+	 * Codage Non Retour ï¿½ Zï¿½ro. Signal ï¿½ max pour un "1" et ï¿½ min pour un
 	 * "0"
 	 */
 	public void codageNRZ() {
@@ -100,7 +100,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Codage Non Retour à  Zéro Triangulaire. Pour un "1", pente montante de
+	 * Codage Non Retour ï¿½ Zï¿½ro Triangulaire. Pour un "1", pente montante de
 	 * min Ã  max durant 1/3 de la pÃ©riode, plateau Ã  max pendant 1 autre tier
 	 * puis pente descendante jusqu'Ã  min pendant le dernier tier de la
 	 * pÃ©riode
@@ -115,7 +115,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 			if (informationRecue.iemeElement(i)) { // cas d'un "1"
 				// Pente montante
 				for (int j = 0; j < nbEchantillon / 3; j++) {
-					penteMontante = ((max - min) * 3 / nbEchantillon) * j;
+					penteMontante = ((max - min) * 3 / nbEchantillon) * j + min;
 					informationEmise.add(penteMontante);
 				}
 
@@ -139,7 +139,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Méthode d'emission de l'information
+	 * Mï¿½thode d'emission de l'information
 	 */
 	@Override
 	public void emettre() throws InformationNonConforme {
@@ -149,7 +149,7 @@ public class EmetteurNumeriqueAnalogique extends Transmetteur<Boolean, Float>
 	}
 
 	/**
-	 * Méthode de réception de l'information
+	 * Mï¿½thode de rï¿½ception de l'information
 	 */
 	@Override
 	public void recevoir(Information<Boolean> information)

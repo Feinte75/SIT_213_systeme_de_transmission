@@ -2,7 +2,7 @@ package element_transmission;
 
 /**
  * 
- * énumération des types de codage
+ * Enumération des types de codage
  *
  */
 public enum TypeCodage {
