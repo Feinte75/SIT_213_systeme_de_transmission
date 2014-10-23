@@ -48,17 +48,18 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des sondes
-		SondeLogique sondeSource = new SondeLogique("Signal emis par la source", "Temps", "Valeur logique");
+		SondeLogique sondeSource = new SondeLogique(
+				"Signal emis par la source", "Temps", "Valeur logique");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
 				"Signal emis par le transmetteur", "Temps", "Amplitude");
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
 				"Signal emis par l'emetteur", "Temps", "Amplitude");
 		SondeLogique sondeRecepteur = new SondeLogique(
 				"Signal emis par le recepteur", "Temps", "Valeur logique");
-		
-		SondeAnalogique histogramme = new SondeAnalogique(
-				"Histogramme de répartition du bruit", "Valeur", "Nombre d'echantillons");
 
+		SondeAnalogique histogramme = new SondeAnalogique(
+				"Histogramme de répartition du bruit", "Valeur",
+				"Nombre d'echantillons");
 
 		// Connecter le transmetteur bruite a la source
 		src.connecter(ena);
@@ -66,11 +67,11 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		ena.connecter(trBruite);
 		trBruite.connecter(ran);
 		ran.connecter(dstFinale);
-		
+
 		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
 		// choisi d'utiliser les sondes
 		if (sonde) {
-			
+
 			// Connecter les sondes a chaque composant
 			src.connecter(sondeSource);
 			ena.connecter(sondeEmetteur);
@@ -83,7 +84,8 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 			// Emission de la source et de l'emetteur
 			src.emettre();
 			ena.emettre();
-			// Emission du transmetteur bruite et du recepteur vers la destination finale
+			// Emission du transmetteur bruite et du recepteur vers la
+			// destination finale
 			trBruite.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
@@ -91,33 +93,32 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 			e.printStackTrace();
 		}
 		histogramme.recevoir(trBruite.getHistogramme());
-		
-		System.out.println("*************************************************************************************************************");
-//		System.out.println("Info generee par source          :"
-//				+ src.getInformationGeneree());
-//		System.out.println("Info emise par source            :"
-//				+ src.getInformationEmise());
-//		System.out.println("Info recue par l'emetteur        :"
-//				+ ena.getInformationRecue());
-//		System.out.println("Info emise par l'emetteur        :"
-//				+ ena.getInformationEmise());
-//		System.out.println("Info recue par le transmetteur   :"
-//				+ trBruite.getInformationRecue());
-//		System.out.println("Info emise par le transmetteur   :"
-//				+ trBruite.getInformationEmise());
-//		System.out.println("Info recue par le recepteur      :"
-//				+ ran.getInformationRecue());
-//		System.out.println("Info emise par le recepteur      :"
-//				+ ran.getInformationEmise());
-//		System.out.println("Info recue par destination finale:"
-//				+ dstFinale.getInformationRecue());
+
+		// System.out.println("Info generee par source          :"
+		// + src.getInformationGeneree());
+		// System.out.println("Info emise par source            :"
+		// + src.getInformationEmise());
+		// System.out.println("Info recue par l'emetteur        :"
+		// + ena.getInformationRecue());
+		// System.out.println("Info emise par l'emetteur        :"
+		// + ena.getInformationEmise());
+		// System.out.println("Info recue par le transmetteur   :"
+		// + trBruite.getInformationRecue());
+		// System.out.println("Info emise par le transmetteur   :"
+		// + trBruite.getInformationEmise());
+		// System.out.println("Info recue par le recepteur      :"
+		// + ran.getInformationRecue());
+		// System.out.println("Info emise par le recepteur      :"
+		// + ran.getInformationEmise());
+		// System.out.println("Info recue par destination finale:"
+		// + dstFinale.getInformationRecue());
 
 		// appel de la fonction de calcul du taux d'erreur binaire
+		System.out.println("\nType de codage :" + codage);
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
-		System.out.println("\nLe taux d'erreur binaire est égal à "
-				+ teb + "%");
-		System.out.println("*************************************************************************************************************");
+		System.out
+				.println("Le taux d'erreur binaire est égal à " + teb + "%");
 
 	}
 }
