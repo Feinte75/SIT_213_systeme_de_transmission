@@ -68,7 +68,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 
 		for (int i = nbEchantillon / 2; i < informationRecue.nbElements(); i += nbEchantillon) {
 
-			if (informationRecue.iemeElement(i).floatValue() >= (max - min) / 2) {
+			if (informationRecue.iemeElement(i).floatValue() >= (max + min) / 2) {
 				informationEmise.add(new Boolean(true));
 			} else {
 				informationEmise.add(new Boolean(false));
@@ -108,7 +108,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 
 		for (int i = nbEchantillon / 4; i < informationRecue.nbElements(); i += nbEchantillon) {
 
-			if (informationRecue.iemeElement(i).floatValue() >= (max - min) / 2) {
+			if (informationRecue.iemeElement(i).floatValue() >= (max + min) / 2) {
 				informationEmise.add(new Boolean(true));
 			} else {
 				informationEmise.add(new Boolean(false));

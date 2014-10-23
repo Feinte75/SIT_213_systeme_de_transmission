@@ -23,7 +23,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 	float puissanceSignal;
 	LinkedList<Float> valeursBruit;
 	HashMap<Float, Integer> mapHisto;
-
+	Information<Float> occHisto;
 	/**
 	 * Constructeur du transmetteur bruité
 	 * 
@@ -142,7 +142,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 		Collections.sort(triHisto);
 
 		// création information occurence
-		Information<Float> occHisto = new Information<Float>();
+		occHisto = new Information<Float>();
 		Iterator<Float> itrHisto = triHisto.iterator();
 		Float keyValeursBruit;
 		float occValeursBruit;
@@ -151,10 +151,9 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 			occValeursBruit = mapHisto.get(keyValeursBruit);
 			occHisto.add(occValeursBruit);
 		}
-
-		// envoi à la sonde
-		SondeAnalogique sa = new SondeAnalogique(
-				"Histogramme de répartition du bruit");
-		sa.recevoir(occHisto);
+	}
+	
+	public Information<Float> getHistogramme(){
+		return occHisto;
 	}
 }

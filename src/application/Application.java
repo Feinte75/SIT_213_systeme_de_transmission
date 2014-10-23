@@ -4,6 +4,7 @@ import element_transmission.Information;
 
 public abstract class Application {
 	
+	protected float teb = 0;
 	/**
 	 * Cette fonction permet de calculer et de retourner le taux d'erreur binaire
 	 * entre le message envoyé à la source et le message reçut par la
@@ -13,7 +14,7 @@ public abstract class Application {
 	 * @param destination La destination de la chaine 
 	 * @return 
 	 */
-	public static float tauxErreurBinaire(Information<Boolean> messEmis, Information<Boolean> messRecu) {
+	public void tauxErreurBinaire(Information<Boolean> messEmis, Information<Boolean> messRecu) {
 		float errBinaire = 0;
 		int nbErr = 0;
 		for (int i = 0; i < messEmis.nbElements(); i++) {
@@ -23,8 +24,12 @@ public abstract class Application {
 			}
 		}
 		System.out.println("Nb err : "+ nbErr + " nbElements :"+messEmis.nbElements());
-		errBinaire =  ((float)nbErr / messEmis.nbElements())*100;
-		return errBinaire;
-		
+		teb =  ((float)nbErr / messEmis.nbElements())*100;	
 	}
+	
+	public float getTeb() {
+		return teb;
+	}
+	
+	
 }

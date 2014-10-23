@@ -51,13 +51,14 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des deux sondes logiques
-		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
-		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
-				"Signal emis par le transmetteur");
+		SondeLogique sondeSource = new SondeLogique("Signal emis par la source","Temps", "Valeur logique");
+		
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
-				"Signal emis par l'emetteur");
+				"Signal emis par l'emetteur", "Temps", "Volt");
+		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
+				"Signal emis par le transmetteur", "Temps", "Volt");
 		SondeLogique sondeRecepteur = new SondeLogique(
-				"Signal emis par le recepteur");
+				"Signal emis par le recepteur","Temps", "Valeur logique");
 
 		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
 		// choisi d'utiliser les sondes
@@ -109,10 +110,9 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 				+ dstFinale.getInformationRecue());
 
 		// appel de la fonction de calcul du taux d'erreur binaire
-		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(),
+		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
-				+ tauxErrBin + "%");
+				+ teb + "%");
 	}
 }

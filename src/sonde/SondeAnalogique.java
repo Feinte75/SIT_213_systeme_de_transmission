@@ -12,8 +12,12 @@ import element_transmission.Information;
  */
 public class SondeAnalogique extends Sonde<Float> {
 
-	public SondeAnalogique(String nom) {
+	private String xName, yName;
+	
+	public SondeAnalogique(String nom, String xName, String yName) {
 		super(nom);
+		this.xName = xName;
+		this.yName = yName;
 	}
 
 	public void recevoir(Information<Float> information) {
@@ -24,7 +28,7 @@ public class SondeAnalogique extends Sonde<Float> {
 			for (int i = 0; i < nbElements; i++) {
 				table[i] = information.iemeElement(i);
 			}
-			new VueCourbe(table, nom);
+			new VueCourbe(table, nom, xName, yName);
 		} else
 			System.out.println(nom + " : " + information);
 	}

@@ -5,7 +5,6 @@ import exception.InformationNonConforme;
 
 /**
  * Classe qui modelise un transmetteur parfait
- * @author user
  *
  */
 

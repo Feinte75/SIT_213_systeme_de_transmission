@@ -11,15 +11,15 @@ import element_transmission.TransmetteurBruite;
 import exception.InformationNonConforme;
 
 /**
- * Cette classe permet simuler la chaine de transmission dans le cas où le
- * signat est burité par le transmetteur
+ * Cette classe permet simuler la chaine de transmission dans le cas oï¿½ le
+ * signat est buritï¿½ par le transmetteur
  * 
  */
 public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 
 	/**
-	 * Méthode qui englobe la création et la connexion des composants de la
-	 * chaîne de transmission dans le cas du signal bruité
+	 * Mï¿½thode qui englobe la crï¿½ation et la connexion des composants de la
+	 * chaï¿½ne de transmission dans le cas du signal bruitï¿½
 	 * 
 	 * @param src
 	 *            Suite de symboles binaires
@@ -28,13 +28,13 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 	 * @param max
 	 *            Valeur max du signal
 	 * @param nbEchantillon
-	 *            Nombre d'échantillons par symbole
+	 *            Nombre d'ï¿½chantillons par symbole
 	 * @param codage
-	 *            Type du codage à utiliser
+	 *            Type du codage ï¿½ utiliser
 	 * @param sonde
-	 *            Spécifie l'utilisation ou pas de la sonde
+	 *            Spï¿½cifie l'utilisation ou pas de la sonde
 	 * @param snr
-	 *            Rapport signal à bruit de la simulation
+	 *            Rapport signal ï¿½ bruit de la simulation
 	 */
 	public void execution(Source<Boolean> src, float min, float max,
 			int nbEchantillon, TypeCodage codage, boolean sonde, float snr) {
@@ -48,14 +48,16 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des sondes
-		SondeLogique sondeSource = new SondeLogique("Signal emis par la source");
+		SondeLogique sondeSource = new SondeLogique("Signal emis par la source", "Temps", "Valeur logique");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
-				"Signal emis par le transmetteur");
+				"Signal emis par le transmetteur", "Temps", "Volt");
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
-				"Signal emis par l'emetteur");
+				"Signal emis par l'emetteur", "Temps", "Volt");
 		SondeLogique sondeRecepteur = new SondeLogique(
-				"Signal emis par le recepteur");
-
+				"Signal emis par le recepteur", "Temps", "Valeur logique");
+		
+		SondeAnalogique histogramme = new SondeAnalogique(
+				"Histogramme de rÃ©partition du bruit", "Valeur", "Nombre d'echantillons");
 
 
 		// Connecter le transmetteur bruite a la source
@@ -88,6 +90,7 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		histogramme.recevoir(trBruite.getHistogramme());
 
 		System.out.println("Info generee par source          :"
 				+ src.getInformationGeneree());
@@ -109,10 +112,9 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 				+ dstFinale.getInformationRecue());
 
 		// appel de la fonction de calcul du taux d'erreur binaire
-		float tauxErrBin = 0;
-		tauxErrBin = tauxErreurBinaire(src.getInformationEmise(),
+		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est Ã©gal Ã  "
-				+ tauxErrBin + "%");
+				+ teb + "%");
 	}
 }
