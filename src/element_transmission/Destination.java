@@ -1,6 +1,9 @@
 package element_transmission;
 import exception.InformationNonConforme;
 
+
+
+
 /**
  * Classe Abstraite d'un composant destination d'informations dont les �l�ments
  * sont de type T
