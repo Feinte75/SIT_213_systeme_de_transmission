@@ -13,4 +13,6 @@ echo "Generation de la javadoc"
 mkdir javadocSysTrans
 javadoc -d javadocSysTrans ./*/*.java
 
-java ihm.Simulateur -mess 10111101101 -etape 2 -ampl 0 5 -nbech 60 -s -form NRZT
+java ihm.Simulateur -mess 10111101101 -etape 3 -ampl 0 5 -nbech 60 -s -form NRZT -snr 10
+java ihm.Simulateur -mess 10111101101 -etape 3 -ampl 0 5 -nbech 60 -s -form RZ -snr 10
+java ihm.Simulateur -mess 10111101101 -etape 3 -ampl 0 5 -nbech 60 -s -form NRZ -snr 10

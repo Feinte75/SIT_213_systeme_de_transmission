@@ -50,14 +50,14 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		// Instanciation des sondes
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source", "Temps", "Valeur logique");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
-				"Signal emis par le transmetteur", "Temps", "Amplitude");
+				"Signal emis par le transmetteur : Type codage "+codage, "Temps", "Amplitude");
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
-				"Signal emis par l'emetteur", "Temps", "Amplitude");
+				"Signal emis par l'emetteur : Type codage "+codage, "Temps", "Amplitude");
 		SondeLogique sondeRecepteur = new SondeLogique(
-				"Signal emis par le recepteur", "Temps", "Valeur logique");
+				"Signal emis par le recepteur: Type codage "+codage, "Temps", "Valeur logique");
 		
 		SondeAnalogique histogramme = new SondeAnalogique(
-				"Histogramme de répartition du bruit", "Valeur", "Nombre d'echantillons");
+				"Histogramme de répartition du bruit : Type codage "+codage, "Valeur", "Nombre d'echantillons");
 
 
 		// Connecter le transmetteur bruite a la source
@@ -91,7 +91,9 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 			e.printStackTrace();
 		}
 		histogramme.recevoir(trBruite.getHistogramme());
-
+		System.out.println("*************************************************************************************************************");
+		System.out.println("*************************************** Type de codage : "+codage+" *****************************************");
+		System.out.println("*************************************************************************************************************");
 		System.out.println("Info generee par source          :"
 				+ src.getInformationGeneree());
 		System.out.println("Info emise par source            :"
@@ -116,5 +118,6 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 				dstFinale.getInformationRecue());
 		System.out.println("\nLe taux d'erreur binaire est égal à "
 				+ teb + "%");
+		System.out.println("***********************************************************************************************************************");
 	}
 }
