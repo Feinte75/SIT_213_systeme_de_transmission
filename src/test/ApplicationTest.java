@@ -43,9 +43,9 @@ public class ApplicationTest {
 	 */
 	@Test
 	public void testApplicationTransmissionAnalogiqueParfaite() {
-		
+
 		ApplicationTransmissionAnalogiqueParfaite app = new ApplicationTransmissionAnalogiqueParfaite();
-		
+
 		// Test codage RZ
 		// Test min negatif et max positif
 		app.execution(new SourceAleatoire("10"), -5, 5, 40, TypeCodage.RZ, false);
@@ -85,7 +85,7 @@ public class ApplicationTest {
 		app.execution(new SourceAleatoire("10"), -10, -5, 40, TypeCodage.NRZT, false);
 		assertEquals(app.getTeb(), 0, 10);
 	}
-	
+
 	/**
 	 * Test de bout en bout de l'application transmission analogique bruitée
 	 * Le test de la generation est validé par l'histogramme. Le caractère aléatoire du bruit
@@ -95,29 +95,59 @@ public class ApplicationTest {
 	@Test
 	public void testApplicationTransmissionAnalogiqueBruitee(){
 		ApplicationTransmissionAnalogiqueBruitee app = new ApplicationTransmissionAnalogiqueBruitee();
-		
+
 		float teb;
-		
+
 		// Test SNR élevé
 		teb = 0;
 		for(int i = 0; i < 50; i++){
-			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZT, false, 20f);
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.NRZT, false, 20f);
 			teb += app.getTeb();
 		}
 		teb /= 50;
 		assertTrue(teb < 10f);
-		
+
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.NRZ, false, 20f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb < 10f);
+
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.RZ, false, 20f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb < 10f);
+
 		// Test SNR faible
 		teb = 0;
 		for(int i = 0; i < 50; i++){
-			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZT, false, 0.7f);
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.NRZT, false, 0.7f);
 			teb += app.getTeb();
 		}
 		teb /= 50;
 		assertTrue(teb > 10f);
 		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.NRZ, false, 0.7f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb > 10f);
 		
-		
+		teb = 0;
+		for(int i = 0; i < 50; i++){
+			app.execution(new SourceAleatoire("20"), 0f, 5f, 40, TypeCodage.RZ, false, 0.7f);
+			teb += app.getTeb();
+		}
+		teb /= 50;
+		assertTrue(teb > 10f);
+
 	}
 
 }
