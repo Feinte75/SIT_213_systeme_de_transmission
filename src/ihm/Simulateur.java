@@ -37,8 +37,8 @@ public class Simulateur {
 		float snr = 0.7f;
 		// -ti
 		int nbTrajetIndirect = 1;
-		int decaTempo[];
-		float amplRel[];
+		int decaTempo[] = { 0, 0, 0, 0, 0 };
+		float amplRel[] = { 0f, 0f, 0f, 0f, 0f};
 		// -transducteur
 		boolean transducteur = false;
 
@@ -47,6 +47,7 @@ public class Simulateur {
 		/********************************************/
 		// traitement des arguments
 		int i = 0;
+		
 
 		while (i < args.length) { // args[i].length() -> taille de l'argument,
 									// args.length -> taille du tableau
@@ -104,13 +105,11 @@ public class Simulateur {
 				if (!(args[++i].matches("[1-5]")))
 					throw new InformationNonConforme("Argument -ti invalide");
 				nbTrajetIndirect = Integer.parseInt(args[i]);
-				decaTempo = new int[nbTrajetIndirect];
-				amplRel = new float[nbTrajetIndirect];
 				
 				for(int j = 0; j< nbTrajetIndirect; j++){
 					decaTempo[j] = Integer.parseInt(args[++i]);
 				}
-				for(int j = nbTrajetIndirect; j< 2 * nbTrajetIndirect; j++){
+				for(int j = 0; j< nbTrajetIndirect; j++){
 					amplRel[j] = (float) (Float.parseFloat(args[++i]));
 				}
 			
@@ -126,6 +125,11 @@ public class Simulateur {
 				+ message + " , -s =" + sonde + " , -form =" + forme
 				+ " , -nbEch =" + nbEch + " , -ampl =" + amplMin + " et "
 				+ amplMax + " , -snr =" + snr);
+		
+		for(int j = 0; j< 5; j++){
+			
+			System.out.println("Trajet "+j+"  Decalage = "+decaTempo[j]+ "  Amplitude = "+amplRel[j]);
+		}
 
 		// Generation de la source en fonction du message d'entree
 		if (isSourceFixe(message))
