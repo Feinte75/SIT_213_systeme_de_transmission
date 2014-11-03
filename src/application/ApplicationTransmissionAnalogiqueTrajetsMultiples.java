@@ -7,12 +7,11 @@ import element_transmission.DestinationFinale;
 import element_transmission.EmetteurNumeriqueAnalogique;
 import element_transmission.RecepteurAnalogiqueNumerique;
 import element_transmission.Source;
-import element_transmission.TransmetteurBruite;
 import element_transmission.TypeCodage;
 import exception.InformationNonConforme;
 
-public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
-		Application {
+public class ApplicationTransmissionAnalogiqueTrajetsMultiples extends
+Application {
 
 	/**
 	 * M�thode qui englobe la cr�ation et la connexion des composants de la
@@ -34,12 +33,11 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 	 *            Rapport signal � bruit de la simulation
 	 */
 	public void execution(Source<Boolean> src, float min, float max,
-			int nbEchantillon, TypeCodage codage, boolean sonde, float snr, int nbTrajetIndirect, int decaTempo[], float amplRel[]) {
+			int nbEchantillon, TypeCodage codage, boolean sonde, int nbTrajetIndirect, int decaTempo[], float amplRel[]) {
 
 		// Instanciation des composants de la chaine de transmission
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
 				max, nbEchantillon, codage);
-		TransmetteurBruite trBruite = new TransmetteurBruite(nbEchantillon, snr);
 		CanalTrajetsMultiples ctm = new CanalTrajetsMultiples(nbTrajetIndirect, decaTempo, amplRel);
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
 				min, max, nbEchantillon, src.getInformationGeneree().nbElements() ,codage);
@@ -52,10 +50,9 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 				"Signal emis par le canal", "Temps", "Amplitude");
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
 				"Signal emis par l'emetteur", "Temps", "Amplitude");
-		SondeAnalogique sondeTrBruite = new SondeAnalogique("Signal emis par le transmetteur bruite", "Temps", "Amplitude");
 		SondeLogique sondeRecepteur = new SondeLogique(
 				"Signal emis par le recepteur", "Temps", "Valeur logique");
-		
+
 		SondeAnalogique histogramme = new SondeAnalogique(
 				"Histogramme de répartition du bruit", "Valeur",
 				"Nombre d'echantillons");
@@ -64,8 +61,7 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 		src.connecter(ena);
 		// Connecter la destination finale au transmetteur bruite
 		ena.connecter(ctm);
-		ctm.connecter(trBruite);
-		trBruite.connecter(ran);
+		ctm.connecter(ran);
 		ran.connecter(dstFinale);
 
 		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
@@ -75,9 +71,8 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 			// Connecter les sondes a chaque composant
 			src.connecter(sondeSource);
 			ena.connecter(sondeEmetteur);
-			
+
 			ctm.connecter(sondeCanal);
-			trBruite.connecter(sondeTrBruite);
 			ran.connecter(sondeRecepteur);
 		}
 
@@ -85,21 +80,22 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 			// Emission de la source et de l'emetteur
 			src.emettre();
 			ena.emettre();
+			// Emission du transmetteur bruite et du recepteur vers la
+			// destination finale
 			ctm.emettre();
-			trBruite.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		histogramme.recevoir(trBruite.getHistogramme());
+		//histogramme.recevoir(trBruite.getHistogramme());
 
 		// appel de la fonction de calcul du taux d'erreur binaire
 		System.out.println("\nType de codage :" + codage);
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
 		System.out
-				.println("Le taux d'erreur binaire est égal à " + teb + "%");
+		.println("Le taux d'erreur binaire est égal à " + teb + "%");
 
 	}
 }

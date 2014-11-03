@@ -47,7 +47,7 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 				max, nbEchantillon, codage);
 		TransmetteurParfait<Float, Float> trParfait = new TransmetteurParfait<Float, Float>();
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
-				min, max, nbEchantillon, codage);
+				min, max, nbEchantillon, src.getInformationGeneree().nbElements(), codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des deux sondes logiques

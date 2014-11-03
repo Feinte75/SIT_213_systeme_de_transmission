@@ -15,6 +15,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 
 	private Float min, max;
 	private int nbEchantillon;
+	private int nbBitsEnvoyes;
 	private TypeCodage type;
 
 	/**
@@ -30,12 +31,13 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 	 *            Type de codage
 	 */
 	public RecepteurAnalogiqueNumerique(float min, float max,
-			int nbEchantillon, TypeCodage type) {
+			int nbEchantillon, int nbBitsEnvoyes, TypeCodage type) {
 		super();
 		informationEmise = new Information<Boolean>();
 		this.min = new Float(min);
 		this.max = new Float(max);
 		this.nbEchantillon = nbEchantillon;
+		this.nbBitsEnvoyes = nbBitsEnvoyes;
 		this.type = type;
 	}
 
@@ -66,7 +68,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 	 */
 	private void decodageNRZT() {
 
-		for (int i = nbEchantillon / 2; i < informationRecue.nbElements(); i += nbEchantillon) {
+		for (int i = nbEchantillon / 2; i < nbBitsEnvoyes * nbEchantillon; i += nbEchantillon) {
 
 			if (informationRecue.iemeElement(i).floatValue() >= (max + min) / 2) {
 				informationEmise.add(new Boolean(true));
@@ -85,7 +87,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 	private void decodageNRZ() {
 
 		float somme = 0;
-		for (int i = 0; i < informationRecue.nbElements(); i += nbEchantillon) {
+		for (int i = 0; i < nbBitsEnvoyes * nbEchantillon; i += nbEchantillon) {
 
 			for (int j = i; j < i + nbEchantillon; j++) {
 
@@ -106,7 +108,7 @@ public class RecepteurAnalogiqueNumerique extends Transmetteur<Float, Boolean>
 	 */
 	private void decodageRZ() {
 
-		for (int i = nbEchantillon / 4; i < informationRecue.nbElements(); i += nbEchantillon) {
+		for (int i = nbEchantillon / 4; i <  nbBitsEnvoyes * nbEchantillon; i += nbEchantillon) {
 
 			if (informationRecue.iemeElement(i).floatValue() >= (max + min) / 2) {
 				informationEmise.add(new Boolean(true));

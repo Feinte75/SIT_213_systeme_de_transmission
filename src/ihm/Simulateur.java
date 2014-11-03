@@ -1,6 +1,8 @@
 package ihm;
 
+import application.ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples;
 import application.ApplicationTransmissionAnalogiqueParfaite;
+import application.ApplicationTransmissionAnalogiqueTrajetsMultiples;
 import application.ApplicationTransmissionLogiqueParfaite;
 import application.ApplicationTransmissionAnalogiqueBruitee;
 import element_transmission.Source;
@@ -147,7 +149,14 @@ public class Simulateur {
 		} else if (etape.equals("3")) {
 			ApplicationTransmissionAnalogiqueBruitee app3 = new ApplicationTransmissionAnalogiqueBruitee();
 			app3.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr);
-		} else
+		} else if (etape.equals("4a")){
+			ApplicationTransmissionAnalogiqueTrajetsMultiples app4a = new ApplicationTransmissionAnalogiqueTrajetsMultiples();
+			app4a.execution(src, amplMin, amplMax, nbEch, forme, sonde, nbTrajetIndirect, decaTempo, amplRel);
+		}else if (etape.equals("4b")){
+			ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples app4b = new ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples();
+			app4b.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr, nbTrajetIndirect, decaTempo, amplRel);
+		}
+		else
 			System.out.println("Etape non codee pour le moment");
 
 	}

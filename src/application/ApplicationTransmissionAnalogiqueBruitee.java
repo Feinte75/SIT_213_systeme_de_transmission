@@ -44,7 +44,7 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 				max, nbEchantillon, codage);
 		TransmetteurBruite trBruite = new TransmetteurBruite(nbEchantillon, snr);
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
-				min, max, nbEchantillon, codage);
+				min, max, nbEchantillon, src.getInformationGeneree().nbElements(), codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des sondes
