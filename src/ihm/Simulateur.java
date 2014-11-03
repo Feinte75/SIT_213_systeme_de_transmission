@@ -13,7 +13,7 @@ import exception.InformationNonConforme;
  * Cette classe permettra de traiter essentiellement la gestion des paramètres
  * décris dans le fichier "commande_unique" sur moodle. Il appelera également
  * les différentes applications (suivant les différents séances/livrables).
- *
+ *B
  */
 public class Simulateur {
 
@@ -36,9 +36,9 @@ public class Simulateur {
 		// -snr
 		float snr = 0.7f;
 		// -ti
-		int iEmeTrajet = 1;
-		int decaTempo = 0;
-		float amplRel = 0.0f;
+		int nbTrajetIndirect = 1;
+		int decaTempo[];
+		float amplRel[];
 		// -transducteur
 		boolean transducteur = false;
 
@@ -103,9 +103,17 @@ public class Simulateur {
 			case "-ti":
 				if (!(args[++i].matches("[1-5]")))
 					throw new InformationNonConforme("Argument -ti invalide");
-				iEmeTrajet = Integer.parseInt(args[i]);
-				decaTempo = Integer.parseInt(args[++i]);
-				amplRel = (float) (Float.parseFloat(args[++i]));
+				nbTrajetIndirect = Integer.parseInt(args[i]);
+				decaTempo = new int[nbTrajetIndirect];
+				amplRel = new float[nbTrajetIndirect];
+				
+				for(int j = 0; j< nbTrajetIndirect; j++){
+					decaTempo[j] = Integer.parseInt(args[++i]);
+				}
+				for(int j = nbTrajetIndirect; j< 2 * nbTrajetIndirect; j++){
+					amplRel[j] = (float) (Float.parseFloat(args[++i]));
+				}
+			
 				break;
 			case "-transducteur":
 				transducteur = true;
