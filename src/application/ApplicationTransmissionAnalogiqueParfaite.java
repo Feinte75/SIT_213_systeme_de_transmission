@@ -90,25 +90,6 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 			e.printStackTrace();
 		}
 
-		System.out.println("Info generee par source          :"
-				+ src.getInformationGeneree());
-		System.out.println("Info emise par source            :"
-				+ src.getInformationEmise());
-		System.out.println("Info recue par l'emetteur        :"
-				+ ena.getInformationRecue());
-		System.out.println("Info emise par l'emetteur        :"
-				+ ena.getInformationEmise());
-		System.out.println("Info recue par le transmetteur   :"
-				+ trParfait.getInformationRecue());
-		System.out.println("Info emise par le transmetteur   :"
-				+ trParfait.getInformationEmise());
-		System.out.println("Info recue par le recepteur      :"
-				+ ran.getInformationRecue());
-		System.out.println("Info emise par le recepteur      :"
-				+ ran.getInformationEmise());
-		System.out.println("Info recue par destination finale:"
-				+ dstFinale.getInformationRecue());
-
 		// appel de la fonction de calcul du taux d'erreur binaire
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());

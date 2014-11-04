@@ -68,17 +68,6 @@ public class ApplicationTransmissionLogiqueParfaite extends Application {
 			e.printStackTrace();
 		}
 
-		System.out.println("Info generee par source          :"
-				+ src.getInformationGeneree());
-		System.out.println("Info emise par source            :"
-				+ src.getInformationEmise());
-		System.out.println("Info recue par transmetteur      :"
-				+ trParfait.getInformationRecue());
-		System.out.println("Info emise par transmetteur      :"
-				+ trParfait.getInformationEmise());
-		System.out.println("Info recue par destination finale:"
-				+ dstFinale.getInformationRecue());
-
 		// appel de la fonction de calcul du taux d'erreur binaire
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
