@@ -98,12 +98,12 @@ public class Simulateur {
 				amplMin = (float) (Float.parseFloat(args[++i]));
 				amplMax = (float) (Float.parseFloat(args[++i]));
 				if ((amplMin > amplMax))
-					throw new InformationNonConforme("Argument -ampl invalide");
+					throw new InformationNonConforme("Argument -ampl invalide amplMin > amplMax");
 				break;
 			case "-snr":
 				snr = (float) (Float.parseFloat(args[++i]));
-				if (snr < 0)
-					throw new InformationNonConforme("Argument -snr negatif");
+				//if (snr < 0)
+				//	throw new InformationNonConforme("Argument -snr negatif");
 				break;
 			case "-ti":
 				if (!(args[++i].matches("[1-5]")))

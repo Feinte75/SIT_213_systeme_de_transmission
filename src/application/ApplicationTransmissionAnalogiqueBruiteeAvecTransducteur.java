@@ -48,8 +48,8 @@ public class ApplicationTransmissionAnalogiqueBruiteeAvecTransducteur extends
 				max, nbEchantillon, codage);
 		TransmetteurBruite trBruite = new TransmetteurBruite(nbEchantillon, snr);
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
-				min, max, nbEchantillon, src.getInformationGeneree()
-						.nbElements(), codage);
+				min, max, nbEchantillon, 3 * src.getInformationGeneree()
+						.nbElements(), codage); // nbBits envoyé multiplié par 3 du au transducteur
 		TransducteurReception transducRe = new TransducteurReception();
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 

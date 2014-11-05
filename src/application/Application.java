@@ -15,7 +15,6 @@ public abstract class Application {
 	 * @return 
 	 */
 	public void tauxErreurBinaire(Information<Boolean> messEmis, Information<Boolean> messRecu) {
-		float errBinaire = 0;
 		int nbErr = 0;
 		for (int i = 0; i < messEmis.nbElements(); i++) {
 			if (messEmis.iemeElement(i).booleanValue() != messRecu.iemeElement(i).booleanValue()) { // Test sur les valeurs (booleanValue) et non sur les references des objets Boolean
