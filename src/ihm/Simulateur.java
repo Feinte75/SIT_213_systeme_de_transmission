@@ -40,7 +40,7 @@ public class Simulateur {
 		// -snr
 		float snr = 0.7f;
 		// -ti
-		int nbTrajetIndirect = 1;
+		int nbTrajetIndirect = 0;
 		int decaTempo[] = { 0, 0, 0, 0, 0 };
 		float amplRel[] = { 0f, 0f, 0f, 0f, 0f};
 		// -transducteur
@@ -124,6 +124,7 @@ public class Simulateur {
 			}
 			i++;
 		}
+		
 
 		System.out.println("Parametres : -etape =" + etape + " , -mess ="
 				+ message + " , -s =" + sonde + " , -form =" + forme
@@ -166,7 +167,6 @@ public class Simulateur {
 		}
 		else
 			System.out.println("Etape non codee pour le moment");
-
 	}
 
 	/**

@@ -134,7 +134,7 @@ public class ApplicationTest {
 		
 		teb = 0;
 		for(int i = 0; i < 50; i++){
-			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZ, false, 0.7f);
+			app.execution(new SourceAleatoire("10"), 0f, 5f, 40, TypeCodage.NRZ, false, -20f);
 			teb += app.getTeb();
 		}
 		teb /= 50;

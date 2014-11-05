@@ -25,8 +25,8 @@ public class SimulateurTest {
 	public void testMain() {
 		// tous les parametres valides n°1
 		String args1[] = { "-etape", "2", "-mess", "9", "-s", "-form", "NRZ",
-				"-nbEch", "1", "-ampl", "1", "2", "-snr", "1", "-ti", "3", "1",
-				"1", "-transducteur" };
+				"-nbEch", "12", "-ampl", "1", "2", "-snr", "1", "-ti", "1", "5",
+				"0.5", "-transducteur" };
 		try {
 			Simulateur.main(args1);
 		} catch (InformationNonConforme e) {

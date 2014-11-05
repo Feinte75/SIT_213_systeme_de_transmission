@@ -70,8 +70,6 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 		// Connecter la destination au recepteur
 		ran.connecter(dstFinale);
 
-		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
-		// choisi d'utiliser les sondes
 		if (sonde) {
 
 			// Connecter les sondes a chaque composant
@@ -91,7 +89,6 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 			trBruite.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		histogramme.recevoir(trBruite.getHistogramme());

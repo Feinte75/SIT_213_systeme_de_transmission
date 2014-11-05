@@ -14,25 +14,6 @@ import exception.InformationNonConforme;
 public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 		Application {
 
-	/**
-	 * M�thode qui englobe la cr�ation et la connexion des composants de la
-	 * cha�ne de transmission dans le cas du signal bruit�
-	 * 
-	 * @param src
-	 *            Suite de symboles binaires
-	 * @param min
-	 *            Valeur min du signal
-	 * @param max
-	 *            Valeur max du signal
-	 * @param nbEchantillon
-	 *            Nombre d'�chantillons par symbole
-	 * @param codage
-	 *            Type du codage � utiliser
-	 * @param sonde
-	 *            Sp�cifie l'utilisation ou pas de la sonde
-	 * @param snr
-	 *            Rapport signal � bruit de la simulation
-	 */
 	public void execution(Source<Boolean> src, float min, float max,
 			int nbEchantillon, TypeCodage codage, boolean sonde, float snr, int nbTrajetIndirect, int decaTempo[], float amplRel[]) {
 
@@ -60,16 +41,13 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 				"Histogramme de répartition du bruit", "Valeur",
 				"Nombre d'echantillons");
 
-		// Connecter le transmetteur bruite a la source
+		
 		src.connecter(ena);
-		// Connecter la destination finale au transmetteur bruite
 		ena.connecter(ctm);
 		ctm.connecter(trBruite);
 		trBruite.connecter(ran);
 		ran.connecter(dstFinale);
-
-		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
-		// choisi d'utiliser les sondes
+		
 		if (sonde) {
 
 			// Connecter les sondes a chaque composant
@@ -82,14 +60,13 @@ public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 		}
 
 		try {
-			// Emission de la source et de l'emetteur
 			src.emettre();
 			ena.emettre();
 			ctm.emettre();
 			trBruite.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 		histogramme.recevoir(trBruite.getHistogramme());

@@ -42,7 +42,6 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 	public void execution(Source<Boolean> src, float min, float max,
 			int nbEchantillon, TypeCodage codage, boolean sonde) {
 
-		// Instanciation d'un objet TransmetteurParfait et DestinationFinale
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
 				max, nbEchantillon, codage);
 		TransmetteurParfait<Float, Float> trParfait = new TransmetteurParfait<Float, Float>();
@@ -50,9 +49,7 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 				min, max, nbEchantillon, src.getInformationGeneree().nbElements(), codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
-		// Instanciation des deux sondes logiques
 		SondeLogique sondeSource = new SondeLogique("Signal emis par la source","Temps", "Valeur logique");
-		
 		SondeAnalogique sondeEmetteur = new SondeAnalogique(
 				"Signal emis par l'emetteur", "Temps", "Amplitude");
 		SondeAnalogique sondeTransmetteur = new SondeAnalogique(
@@ -60,15 +57,12 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 		SondeLogique sondeRecepteur = new SondeLogique(
 				"Signal emis par le recepteur","Temps", "Valeur logique");
 
-		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
-		// choisi d'utiliser les sondes
 
-		// Connecter le transmetteur parfait a la source
 		src.connecter(ena);
-		// Connecter la destination finale au transmetteur parfait
 		ena.connecter(trParfait);
 		trParfait.connecter(ran);
 		ran.connecter(dstFinale);
+		
 		// Connecter les sondes a chaque composant
 		if (sonde) {
 			src.connecter(sondeSource);
@@ -79,14 +73,11 @@ public class ApplicationTransmissionAnalogiqueParfaite extends Application {
 		}
 
 		try {
-			// Emission de la source
 			src.emettre();
 			ena.emettre();
-			// Emission du transmetteur parfait
 			trParfait.emettre();
 			ran.emettre();
 		} catch (InformationNonConforme e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

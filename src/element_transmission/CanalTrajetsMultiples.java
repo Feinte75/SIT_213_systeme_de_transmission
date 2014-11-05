@@ -23,6 +23,10 @@ public class CanalTrajetsMultiples extends Transmetteur<Float, Float> {
 		generationTrajetsMultiples(informationRecue);
 	}
 
+	/**
+	 * Genere les trajets retardés et les somme pour constituer le signal en sortie de canal
+	 * @param information Le signal a l'entrée du canal
+	 */
 	public void generationTrajetsMultiples(Information<Float> information){
 
 		float signauxRetarde[][] = new float[nbTrajetIndirect][];
@@ -30,11 +34,10 @@ public class CanalTrajetsMultiples extends Transmetteur<Float, Float> {
 		int decaTempoMax = 0;
 		informationEmise = new Information<Float>();
 
-		
+		// Recherche du plus grand decalage afin de determiner la taille du signal d'arrivé
 		for(int i = 0; i < nbTrajetIndirect; i++){
 			if (decaTempo[i] > decaTempoMax)decaTempoMax = decaTempo[i]; 
 		}
-		
 		signalFinal = new float[information.nbElements() + decaTempoMax];
 		
 		// Generation de nbTrajetIndirect signaux 
@@ -43,7 +46,7 @@ public class CanalTrajetsMultiples extends Transmetteur<Float, Float> {
 			// Instanciation du ieme trajet avec une taille de nbElement + decalage
 			signauxRetarde[i] = new float[information.nbElements() + decaTempo[i]];
 
-			// Parcours trajet et calcul du signal emi
+			// Remplissage trajet retardé en fonction de l'amplitude relavite au signal initial
 			for(int j = 0; j < signauxRetarde[i].length; j ++){
 			
 				if(j < decaTempo[i]) signauxRetarde[i][j] = 0f;
