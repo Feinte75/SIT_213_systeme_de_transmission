@@ -22,7 +22,7 @@ import exception.InformationNonConforme;
  *
  */
 public class ApplicationTransmissionLogiqueParfaiteAvecTransducteur extends
-		Application {
+Application {
 
 	/**
 	 * Méthode déroulant l'application de transmission logique parfaite avec
@@ -99,6 +99,6 @@ public class ApplicationTransmissionLogiqueParfaiteAvecTransducteur extends
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
 		System.out
-				.println("\nLe taux d'erreur binaire est égal à " + teb + "%");
+		.println("\nLe taux d'erreur binaire est égal à " + teb + "%");
 	}
 }

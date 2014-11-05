@@ -11,8 +11,13 @@ import element_transmission.TransmetteurBruite;
 import exception.InformationNonConforme;
 
 /**
- * Cette classe permet simuler la chaine de transmission dans le cas o� le
- * signat est burit� par le transmetteur
+ * Cette classe permet de mettre en oeuvre le livrable n°3 du projet
+ * L'application simule une transmission analogique avec un ajout de bruit
+ * Le bruit est generé au sein du transmetteur selon une loi gaussienne centrée
+ * et dont la variance est determiné grace au rapport signal a bruit donné 
+ * en paramètre (puissance de bruit = variance)
+ * Un histogramme est generé avec les echantillons de bruit afin de vérifier
+ * que le bruit suit une loi gaussienne.
  * 
  */
 public class ApplicationTransmissionAnalogiqueBruitee extends Application {

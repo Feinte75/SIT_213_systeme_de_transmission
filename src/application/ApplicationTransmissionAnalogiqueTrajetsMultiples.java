@@ -14,14 +14,16 @@ public class ApplicationTransmissionAnalogiqueTrajetsMultiples extends
 Application {
 
 	public void execution(Source<Boolean> src, float min, float max,
-			int nbEchantillon, TypeCodage codage, boolean sonde, int nbTrajetIndirect, int decaTempo[], float amplRel[]) {
+			int nbEchantillon, TypeCodage codage, boolean sonde,
+			int nbTrajetIndirect, int decaTempo[], float amplRel[]) {
 
 		// Instanciation des composants de la chaine de transmission
 		EmetteurNumeriqueAnalogique ena = new EmetteurNumeriqueAnalogique(min,
 				max, nbEchantillon, codage);
-		CanalTrajetsMultiples ctm = new CanalTrajetsMultiples(nbTrajetIndirect, decaTempo, amplRel);
+		CanalTrajetsMultiples ctm = new CanalTrajetsMultiples(nbTrajetIndirect,
+				decaTempo, amplRel);
 		RecepteurAnalogiqueNumerique ran = new RecepteurAnalogiqueNumerique(
-				min, max, nbEchantillon, src.getInformationGeneree().nbElements() ,codage);
+				min, max, nbEchantillon, src.getInformationGeneree().nbElements(), codage);
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des sondes
@@ -62,13 +64,11 @@ Application {
 			e.printStackTrace();
 		}
 
-
 		// appel de la fonction de calcul du taux d'erreur binaire
 		System.out.println("\nType de codage :" + codage);
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
-		System.out
-		.println("Le taux d'erreur binaire est égal à " + teb + "%");
+		System.out.println("Le taux d'erreur binaire est égal à " + teb + "%");
 
 	}
 }

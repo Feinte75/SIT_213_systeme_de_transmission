@@ -7,16 +7,11 @@ import element_transmission.TransmetteurParfait;
 import exception.InformationNonConforme;
 
 /**
+ * Cette classe permet de mettre en oeuvre le livrable n°1 du projet
+ * L'application simule une transmission logique parfaite Les bits generé par la
+ * source sont envoyés dans un transmetteur parfait qui les envois à la
+ * destination
  * 
- * Cette classe correspond à l'application développée pour le livrable numéro 1
- * La chaine de transmission déduite de cette application est composée de : une
- * source, un transmetteur parfait et une destination. Des sondes sont connectés
- * à ces trois éléments de la chaine pour observer : le signal émit par la
- * source et le transmetteur, puis le signal reçu par la destination. Ainsi le
- * taux d'erreur binaire peut être défini en comparant le message envoyé du
- * message reçu.
- *
- *
  */
 public class ApplicationTransmissionLogiqueParfaite extends Application {
 
@@ -35,7 +30,8 @@ public class ApplicationTransmissionLogiqueParfaite extends Application {
 		DestinationFinale<Boolean> dstFinale = new DestinationFinale<Boolean>();
 
 		// Instanciation des deux sondes logiques
-		SondeLogique sondeSource = new SondeLogique("Signal emis par la source", "Temps", "Valeur logique");
+		SondeLogique sondeSource = new SondeLogique(
+				"Signal emis par la source", "Temps", "Valeur logique");
 		SondeLogique sondeTransmetteur = new SondeLogique(
 				"Signal emis par le transmetteur", "Temps", "Valeur logique");
 
@@ -71,7 +67,7 @@ public class ApplicationTransmissionLogiqueParfaite extends Application {
 		// appel de la fonction de calcul du taux d'erreur binaire
 		tauxErreurBinaire(src.getInformationEmise(),
 				dstFinale.getInformationRecue());
-		System.out.println("\nLe taux d'erreur binaire est égal à "
-				+ teb + "%");
+		System.out
+		.println("\nLe taux d'erreur binaire est égal à " + teb + "%");
 	}
 }

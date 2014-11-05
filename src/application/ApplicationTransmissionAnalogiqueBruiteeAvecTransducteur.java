@@ -86,8 +86,6 @@ public class ApplicationTransmissionAnalogiqueBruiteeAvecTransducteur extends
 		// Connecter la destination au transducteurReception
 		transducRe.connecter(dstFinale);
 
-		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a
-		// choisi d'utiliser les sondes
 		if (sonde) {
 
 			// Connecter les sondes a chaque composant
