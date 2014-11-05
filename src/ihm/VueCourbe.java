@@ -245,7 +245,7 @@ public class VueCourbe extends Vue {
 			dy = -(deltaY / yMin);
 		}
 
-		setIgnoreRepaint(true);
+		//setIgnoreRepaint(true);
 		setForeground(Color.PINK);
 		for (int i = 1; i < coordonnees.length; i++) {
 			int x1 = (int) (coordonnees[i - 1].getX() * dx);
