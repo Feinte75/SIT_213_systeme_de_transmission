@@ -19,6 +19,8 @@ public class TransducteurReception extends Transmetteur<Boolean, Boolean> {
 	 * 100->1 101->1 110->0 111->1
 	 */
 	private void transduction() {
+		Information<Boolean> infoAEmettre = new Information<Boolean>();
+		
 		int tab = 0;
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
 			tab = 0;
@@ -30,32 +32,34 @@ public class TransducteurReception extends Transmetteur<Boolean, Boolean> {
 				tab += 1;
 
 			switch (tab) {
-			case 000:
-				informationEmise.add(false);
+			case 0:
+				infoAEmettre.add(false);
 				break;
-			case 001:
-				informationEmise.add(true);
+			case 1:
+				infoAEmettre.add(true);
 				break;
-			case 010:
-				informationEmise.add(false);
+			case 10:
+				infoAEmettre.add(false);
 				break;
-			case 011:
-				informationEmise.add(false);
+			case 11:
+				infoAEmettre.add(false);
 				break;
 			case 100:
-				informationEmise.add(true);
+				infoAEmettre.add(true);
 				break;
 			case 101:
-				informationEmise.add(true);
+				infoAEmettre.add(true);
 				break;
 			case 110:
-				informationEmise.add(false);
+				infoAEmettre.add(false);
 				break;
 			case 111:
-				informationEmise.add(true);
+				infoAEmettre.add(true);
 				break;
 			}
 		}
+		
+		informationEmise = infoAEmettre;
 	}
 
 	/**

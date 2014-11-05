@@ -61,11 +61,13 @@ public class ApplicationTransmissionAnalogiqueBruitee extends Application {
 				"Histogramme de répartition du bruit", "Valeur",
 				"Nombre d'echantillons");
 
-		// Connecter le transmetteur bruite a la source
+		// Connecter l'emetteur a la source
 		src.connecter(ena);
-		// Connecter la destination finale au transmetteur bruite
+		// Connecter le transmetteur à l'emetteur
 		ena.connecter(trBruite);
+		// Connecter le recepteur au transmetteur
 		trBruite.connecter(ran);
+		// Connecter la destination au recepteur
 		ran.connecter(dstFinale);
 
 		// Verifier que l'utilisateur a bien saisi deux arguments et qu'il a

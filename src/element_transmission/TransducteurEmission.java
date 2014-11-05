@@ -1,5 +1,7 @@
 package element_transmission;
 
+import java.util.LinkedList;
+
 import exception.InformationNonConforme;
 
 /**
@@ -19,17 +21,21 @@ public class TransducteurEmission extends Transmetteur<Boolean, Boolean> {
 	 * celle émise : 1->101 0->010
 	 */
 	private void transduction() {
+		Information<Boolean> infoAEmettre = new Information<Boolean>();
+		
 		for (int i = 0; i < informationRecue.nbElements(); i++) {
 			if (informationRecue.iemeElement(i)) {
-				informationEmise.add(true);
-				informationEmise.add(false);
-				informationEmise.add(true);
+				infoAEmettre.add(true);
+				infoAEmettre.add(false);
+				infoAEmettre.add(true);
 			} else {
-				informationEmise.add(false);
-				informationEmise.add(true);
-				informationEmise.add(false);
+				infoAEmettre.add(false);
+				infoAEmettre.add(true);
+				infoAEmettre.add(false);
 			}
 		}
+		
+		informationEmise = infoAEmettre;
 
 	}
 
