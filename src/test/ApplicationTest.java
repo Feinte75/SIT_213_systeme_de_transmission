@@ -10,6 +10,7 @@ import org.junit.Test;
 import application.ApplicationTransmissionAnalogiqueBruitee;
 import application.ApplicationTransmissionAnalogiqueParfaite;
 import application.ApplicationTransmissionLogiqueParfaite;
+import application.ApplicationTransmissionLogiqueParfaiteAvecTransducteur;
 import element_transmission.SourceAleatoire;
 import element_transmission.SourceFixe;
 import element_transmission.TypeCodage;
@@ -148,6 +149,13 @@ public class ApplicationTest {
 		}
 		teb /= 50;
 		assertTrue(teb > 10f);
+		
+	}
+	
+	@Test
+	public void testApplicationTransmissionLogiqueParfaiteAvecTransducteur(){
+		
+		ApplicationTransmissionLogiqueParfaiteAvecTransducteur app = new ApplicationTransmissionLogiqueParfaiteAvecTransducteur();
 		
 		
 	}
