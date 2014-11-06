@@ -44,3 +44,11 @@ Par défaut le simulateur utilise 0.0f comme min et 1.0f comme max.
 
 -snr s
 précise la valeur du rapport signal sur bruit (SNR en dB). 
+
+-ti i dt ar
+précise le décalage temporel (dt : en nombre d’échantillons) entre le i ème trajet indirect 
+du signal et le trajet direct, précise aussi l’amplitude relative (ar) du signal du i ème 
+trajet indirect par rapport à celle du signal du trajet direct. 
+Les paramètres i, dt et ar doivent être respectivement une valeur entière (de 1 à 5),
+une valeur entière et une valeur flottante. Par défaut le simulateur doit utiliser 0 et 0.0f 
+pour tous les trajets indirects (5 au maximum). 
