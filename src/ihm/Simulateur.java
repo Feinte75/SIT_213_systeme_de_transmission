@@ -31,7 +31,7 @@ public class Simulateur {
 		// -s
 		boolean sonde = false;
 		// -form
-		TypeCodage forme = TypeCodage.NRZ;
+		TypeCodage forme = TypeCodage.RZ;
 		// -nbEch
 		int nbEch = 10;
 		// -ampl
@@ -86,12 +86,12 @@ public class Simulateur {
 					forme = TypeCodage.NRZT;
 					break;
 				default:
-					throw new InformationNonConforme("Argument -form invalide");
+					throw new InformationNonConforme("Argument -form invalide. Veuillez entrer RZ, NRZ ou NRZT");
 				}
 				break;
 			case "-nbEch":
-				if (!(Integer.parseInt(args[++i]) >= 4))
-					throw new InformationNonConforme("Argument -nbEch invalide");
+				if (!(Integer.parseInt(args[++i]) >= 6))
+					throw new InformationNonConforme("Argument -nbEch invalide, Veuillez entrer un nbEchantillon > 6");
 				nbEch = Integer.parseInt(args[i]);
 				break;
 			case "-ampl":
@@ -101,13 +101,15 @@ public class Simulateur {
 					throw new InformationNonConforme("Argument -ampl invalide amplMin > amplMax");
 				break;
 			case "-snr":
-				snr = (float) (Float.parseFloat(args[++i]));
+				if(!args[++i].matches("[-][0-9]{1,3}"))
+					throw new InformationNonConforme("Argument -snr invalide veuillez entrer un nombre approprié en dB");
+				snr = (float) (Float.parseFloat(args[i]));
 				//if (snr < 0)
 				//	throw new InformationNonConforme("Argument -snr negatif");
 				break;
 			case "-ti":
 				if (!(args[++i].matches("[1-5]")))
-					throw new InformationNonConforme("Argument -ti invalide");
+					throw new InformationNonConforme("Argument -ti invalide, entrez un nb de trajet entre 1 et 5");
 				nbTrajetIndirect = Integer.parseInt(args[i]);
 				
 				for(int j = 0; j< nbTrajetIndirect; j++){
@@ -130,11 +132,6 @@ public class Simulateur {
 				+ message + " , -s =" + sonde + " , -form =" + forme
 				+ " , -nbEch =" + nbEch + " , -ampl =" + amplMin + " et "
 				+ amplMax + " , -snr =" + snr);
-		
-		for(int j = 0; j< 5; j++){
-			
-			System.out.println("Trajet "+j+"  Decalage = "+decaTempo[j]+ "  Amplitude = "+amplRel[j]);
-		}
 
 		// Generation de la source en fonction du message d'entree
 		if (isSourceFixe(message))

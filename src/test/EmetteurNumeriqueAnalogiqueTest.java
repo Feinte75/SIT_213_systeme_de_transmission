@@ -25,14 +25,17 @@ public class EmetteurNumeriqueAnalogiqueTest {
 
 	@Before
 	public void setUp() throws Exception {
-		src = new SourceFixe("10101100");
+		
 	}
 
 	@Test
 	public void testCodageNRZ() {
-		float min = -3;
-		float max = 7;
-		ena = new EmetteurNumeriqueAnalogique(min, max, 2, TypeCodage.NRZ);
+		float min = 0;
+		float max = 4;
+		
+		src = new SourceFixe("1");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 4, TypeCodage.NRZ);
 		src.connecter(ena);
 		
 		try {
@@ -42,38 +45,86 @@ public class EmetteurNumeriqueAnalogiqueTest {
 			
 		}
 		
-		Information<Float> infoAttendu = new Information<Float>();
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-
-		Information<Float> infoEmise = ena.getInformationEmise();
-		assertTrue(infoAttendu.equals(infoEmise));
+		int i = 0;
+		while(i < 4){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != max)fail();
+			i++;
+		}
+		
+		src = new SourceFixe("0");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 4, TypeCodage.NRZ);
+		src.connecter(ena);
+		
+		try {
+			src.emettre();
+			ena.emettre();
+		} catch (InformationNonConforme e) {
+			
+		}
+		i = 0;
+		while(i < 4){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != min)fail();
+			i++;
+		}
 	}
 
 	@Test
 	public void testCodageNRZT() {
-		fail("Not yet implemented");
+		
+		float min = 0;
+		float max = 3;
+		
+		src = new SourceFixe("1");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 6, TypeCodage.NRZT);
+		src.connecter(ena);
+		
+		try {
+			src.emettre();
+			ena.emettre();
+		} catch (InformationNonConforme e) {
+		}
+		
+		assertTrue(ena.getInformationEmise().nbElements() == 6);
+		
+		int i = 0;
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != min)fail();
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != max/2)fail();
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != max)fail();
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != max)fail();
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != max)fail();
+		if(ena.getInformationEmise().iemeElement(i++).floatValue() != max/2)fail();
+		
+		src = new SourceFixe("0");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 6, TypeCodage.NRZT);
+		src.connecter(ena);
+		
+		try {
+			src.emettre();
+			ena.emettre();
+		} catch (InformationNonConforme e) {
+		}
+		
+		assertTrue(ena.getInformationEmise().nbElements() == 6);
+		
+		i = 0;
+		while(i < 6){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != min)fail();
+			i++;
+		}
 	}
 	
 	@Test
 	public void testCodageRZ() {
-		/*float min = -3;
-		float max = 7;
-		ena = new EmetteurNumeriqueAnalogique(min, max, 2, TypeCodage.RZ);
+		
+		float min = 0;
+		float max = 4;
+		
+		src = new SourceFixe("1");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 4, TypeCodage.RZ);
 		src.connecter(ena);
 		
 		try {
@@ -83,25 +134,32 @@ public class EmetteurNumeriqueAnalogiqueTest {
 			
 		}
 		
-		Information<Float> infoAttendu = new Information<Float>();
-		infoAttendu.add(max);
-		infoAttendu.add(0f);
-		infoAttendu.add(min);
-		infoAttendu.add(0f);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(max);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-		infoAttendu.add(min);
-
-		Information<Float> infoEmise = ena.getInformationEmise();
-		assertTrue(infoAttendu.equals(infoEmise));*/
+		int i = 0;
+		while(i < 2){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != max)fail();
+			i++;
+		}
+		while(i < 4){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != min)fail();
+			i++;
+		}
+		
+		src = new SourceFixe("0");
+		
+		ena = new EmetteurNumeriqueAnalogique(min, max, 4, TypeCodage.RZ);
+		src.connecter(ena);
+		
+		try {
+			src.emettre();
+			ena.emettre();
+		} catch (InformationNonConforme e) {
+			
+		}
+		i = 0;
+		while(i < 4){
+			if(ena.getInformationEmise().iemeElement(i).floatValue() != min)fail();
+			i++;
+		}
+		
 	}
 }

@@ -159,5 +159,16 @@ public class ApplicationTest {
 		
 		
 	}
+	
+	@Test
+	public void testApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples(){
+		
+	}
+	
+	@Test
+	public void testApplicationTransmissionAnalogiqueTrajetsMultiples(){
+		
+	}
+	
 
 }
