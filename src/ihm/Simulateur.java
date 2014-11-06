@@ -101,8 +101,6 @@ public class Simulateur {
 					throw new InformationNonConforme("Argument -ampl invalide amplMin > amplMax");
 				break;
 			case "-snr":
-				if(!args[++i].matches("[-][0-9]{1,3}"))
-					throw new InformationNonConforme("Argument -snr invalide veuillez entrer un nombre approprié en dB");
 				snr = (float) (Float.parseFloat(args[i]));
 				//if (snr < 0)
 				//	throw new InformationNonConforme("Argument -snr negatif");
