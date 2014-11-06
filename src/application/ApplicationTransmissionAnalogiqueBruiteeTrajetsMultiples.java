@@ -11,6 +11,7 @@ import element_transmission.TransmetteurBruite;
 import element_transmission.TypeCodage;
 import exception.InformationNonConforme;
 
+
 public class ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples extends
 		Application {
 

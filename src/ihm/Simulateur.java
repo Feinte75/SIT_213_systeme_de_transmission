@@ -1,11 +1,11 @@
 package ihm;
 
+import application.ApplicationTransmissionAnalogiqueBruitee;
 import application.ApplicationTransmissionAnalogiqueBruiteeAvecTransducteur;
 import application.ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples;
 import application.ApplicationTransmissionAnalogiqueParfaite;
 import application.ApplicationTransmissionAnalogiqueTrajetsMultiples;
 import application.ApplicationTransmissionLogiqueParfaite;
-import application.ApplicationTransmissionAnalogiqueBruitee;
 import application.ApplicationTransmissionLogiqueParfaiteAvecTransducteur;
 import element_transmission.Source;
 import element_transmission.SourceAleatoire;

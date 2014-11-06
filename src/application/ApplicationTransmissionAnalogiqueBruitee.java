@@ -1,6 +1,5 @@
 package application;
 
-import element_transmission.TypeCodage;
 import sonde.SondeAnalogique;
 import sonde.SondeLogique;
 import element_transmission.DestinationFinale;
@@ -8,6 +7,7 @@ import element_transmission.EmetteurNumeriqueAnalogique;
 import element_transmission.RecepteurAnalogiqueNumerique;
 import element_transmission.Source;
 import element_transmission.TransmetteurBruite;
+import element_transmission.TypeCodage;
 import exception.InformationNonConforme;
 
 /**

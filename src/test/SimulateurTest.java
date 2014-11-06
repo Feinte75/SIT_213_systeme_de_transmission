@@ -8,7 +8,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import exception.InformationNonConforme;
-import application.ApplicationTransmissionAnalogiqueParfaite;
 
 public class SimulateurTest {
 

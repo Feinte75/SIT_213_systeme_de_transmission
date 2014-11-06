@@ -1,13 +1,11 @@
 package element_transmission;
 
-import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
 
-import sonde.SondeAnalogique;
 import exception.InformationNonConforme;
 
 /**
@@ -133,7 +131,7 @@ public class TransmetteurBruite extends Transmetteur<Float, Float> {
 			if (val != null) {
 				mapHisto.put(vb, val + 1);
 			} else {
-				mapHisto.put(vb, 1);
+				mapHisto.put(vb, 0);
 			}
 		}
 

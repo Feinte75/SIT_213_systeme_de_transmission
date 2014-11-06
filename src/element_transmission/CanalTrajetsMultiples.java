@@ -45,7 +45,8 @@ public class CanalTrajetsMultiples extends Transmetteur<Float, Float> {
 
 			// Instanciation du ieme trajet avec une taille de nbElement + decalage
 			signauxRetarde[i] = new float[information.nbElements() + decaTempo[i]];
-
+			System.out.println();
+			System.out.println("Trajet : "+i);
 			// Remplissage trajet retardé en fonction de l'amplitude relavite au signal initial
 			for(int j = 0; j < signauxRetarde[i].length; j ++){
 			
@@ -53,15 +54,18 @@ public class CanalTrajetsMultiples extends Transmetteur<Float, Float> {
 				else signauxRetarde[i][j] = amplRel[i] * information.iemeElement(j - decaTempo[i]).floatValue();
 		
 				signalFinal[j] += signauxRetarde[i][j]; // Somme des trajets retardés
+				System.out.print(signauxRetarde[i][j]+" ");
 			}
 		}
+		System.out.println();
+		System.out.println(" Final : ");
 		
 		// Generation information émise en faisant la somme des trajets retardés au signal initial
 		for(int i = 0; i < information.nbElements() + decaTempoMax; i++){
 			if(i < information.nbElements()) informationEmise.add(signalFinal[i] + information.iemeElement(i)); 
 			else informationEmise.add(signalFinal[i]); 
+			System.out.print(informationEmise.iemeElement(i) + " ");
 		}
-
 	}
 
 }
