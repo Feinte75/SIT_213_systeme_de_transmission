@@ -59,7 +59,7 @@ public class Simulateur {
 			switch (args[i]) {
 			case "-etape":
 				if (!args[++i].matches("[123]||[45][abAB]"))
-					throw new InformationNonConforme("Argument -etape invalide");
+					throw new InformationNonConforme("Argument -etape invalide Veuillez entrer une des etapes suivante : 1, 2, 3, 4a, 4b, 5a, 5b");
 				etape = args[i];
 				break;
 			case "-mess":
@@ -68,7 +68,7 @@ public class Simulateur {
 					// n'est pas une suite de 0 et de 1
 					// ou si l'argument n'est pas une suite de chiffres compris
 					// entre 0 et 9 à hauteur de 6 chiffes maximum
-					throw new InformationNonConforme("Argument -mess invalide");
+					throw new InformationNonConforme("Argument -mess invalide veuillez entrer un nombre inferieur ou egal à 7 caractères ou une suite de bits superieurs à 7");
 				message = args[i];
 				break;
 			case "-s":
@@ -149,9 +149,19 @@ public class Simulateur {
 			app3.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr);
 		} else if (etape.equals("4a")){
 			ApplicationTransmissionAnalogiqueTrajetsMultiples app4a = new ApplicationTransmissionAnalogiqueTrajetsMultiples();
+			int j = 0;
+			while(j < 5){
+				System.out.println("Trajet : "+j+"  Decalage : "+decaTempo[j]+ "  Amplitude relative : "+amplRel[j]);
+				j++;
+			}
 			app4a.execution(src, amplMin, amplMax, nbEch, forme, sonde, nbTrajetIndirect, decaTempo, amplRel);
 		}else if (etape.equals("4b")){
 			ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples app4b = new ApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples();
+			int j = 0;
+			while(j < 5){
+				System.out.println("Trajet : "+j+"  Decalage : "+decaTempo[j]+ "  Amplitude relative : "+amplRel[j]);
+				j++;
+			}
 			app4b.execution(src, amplMin, amplMax, nbEch, forme, sonde, snr, nbTrajetIndirect, decaTempo, amplRel);
 		} else if (etape.equals("5a")) {
 			ApplicationTransmissionLogiqueParfaiteAvecTransducteur app5a = new ApplicationTransmissionLogiqueParfaiteAvecTransducteur();
