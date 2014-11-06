@@ -7,6 +7,10 @@ Pour executer l'applications avec les paramètres souhaités il faut ensuite tap
 
 java ihm.Simulateur
 
+Pour compiler les tests, sous reserve de la possession de Junit sur son Pc :
+
+javac -cp junit-4.4.jar ./test/*.java
+
 Differents paramètres peuvent être donnés en argument. La liste est donnée à suivre :
 
 -etape e
