@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import application.ApplicationTransmissionAnalogiqueBruitee;
 import application.ApplicationTransmissionAnalogiqueParfaite;
+import application.ApplicationTransmissionAnalogiqueTrajetsMultiples;
 import application.ApplicationTransmissionLogiqueParfaite;
 import application.ApplicationTransmissionLogiqueParfaiteAvecTransducteur;
 import element_transmission.SourceAleatoire;
@@ -155,19 +156,24 @@ public class ApplicationTest {
 	@Test
 	public void testApplicationTransmissionLogiqueParfaiteAvecTransducteur(){
 		
+		// Non regression, test de bon fonctionnement
 		ApplicationTransmissionLogiqueParfaiteAvecTransducteur app = new ApplicationTransmissionLogiqueParfaiteAvecTransducteur();
-		
+		app.execution(new SourceAleatoire("20"), false);
 		
 	}
 	
 	@Test
 	public void testApplicationTransmissionAnalogiqueBruiteeTrajetsMultiples(){
-		
+		ApplicationTransmissionAnalogiqueBruitee app = new ApplicationTransmissionAnalogiqueBruitee();
+		app.execution(new SourceAleatoire("20"), 0, 5, 30, TypeCodage.NRZ, false, 10);
 	}
 	
 	@Test
 	public void testApplicationTransmissionAnalogiqueTrajetsMultiples(){
-		
+		ApplicationTransmissionAnalogiqueTrajetsMultiples app = new ApplicationTransmissionAnalogiqueTrajetsMultiples();
+		int decaTempo[] = { 5, 10 };
+		float amplRel[] = { 0.5f, 0.3f};
+		app.execution(new SourceAleatoire("20"), 0, 5, 30, TypeCodage.NRZ, false, 2, decaTempo , amplRel);
 	}
 	
 
